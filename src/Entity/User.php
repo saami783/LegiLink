@@ -43,7 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column]
     private ?bool $isVerified = false;
 
-    #[ORM\Column(length: '6')]
+    #[ORM\Column(length: '6', nullable: true)]
     private ?string $authCode;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: false)]
