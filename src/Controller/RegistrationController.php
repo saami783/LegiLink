@@ -45,7 +45,7 @@ class RegistrationController extends AbstractController
                     $password
                 )
             );
-
+            $user->setCreatedAt(new \DateTimeImmutable());
             $entityManager->persist($user);
             $entityManager->flush();
 
