@@ -1,0 +1,62 @@
+{% extends 'layouts/base_security.html.twig' %}
+
+{% block title %}Double Authentification{% endblock %}
+
+{% block stylesheets %} {% endblock %}
+
+{% block body %}
+    <br><br><br><br>
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-sm-12">
+                <div class="card-body center-form">
+
+                    <div style="text-align: center;">
+                        <h3>Authentification en Deux Étapes</h3>
+                        <p>Un code d'authentification a été envoyé à votre adresse e-mail.</p>
+                        {% if authenticationError %}
+                            <div class="alert alert-danger">{{ authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle') }}</div>
+                        {% endif %}
+                    </div>
+
+
+                    <form class="form" action="{{ checkPathUrl ? checkPathUrl: path(checkPathRoute) }}" method="post">
+                        <div class="form-group col-md-12">
+                            <input
+                                    id="_auth_code"
+                                    type="text"
+                                    name="{{ authCodeParameterName }}"
+                                    autocomplete="one-time-code"
+                                    class="form-control form-control-lg register-form"
+                                    autofocus
+                                    inputmode="numeric"
+                                    pattern="[0-9]*"
+                            />
+                        </div>
+
+                        <br>
+                        {% if displayTrustedOption %}
+                            <div class="form-group">
+                                <label for="_trusted"><input id="_trusted" type="checkbox" name="{{ trustedParameterName }}" /> {{ "trusted"|trans({}, 'SchebTwoFactorBundle') }}</label>
+                            </div>
+                        {% endif %}
+
+                        {% if isCsrfProtectionEnabled %}
+                            <input type="hidden" name="{{ csrfParameterName }}" value="{{ csrf_token(csrfTokenId) }}">
+                        {% endif %}
+
+                        <div class="form-group mt-4 mb-0 col-md-12">
+                            <button class="btn btn-block form-control-lg" type="submit" style="background-color: #A27E6B; color: white;">
+                                {{ "login"|trans({}, 'SchebTwoFactorBundle') }}
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <a class="btn btn-link" href="{{ logoutPath }}">{{ "cancel"|trans({}, 'SchebTwoFactorBundle') }}</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
