@@ -8,6 +8,7 @@ use App\Enum\UserRoleEnum;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -16,6 +17,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Security\Core\User\UserInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
+
 
 class UserCrudController extends AbstractCrudController
 {
@@ -81,7 +84,7 @@ class UserCrudController extends AbstractCrudController
         $actions->remove(Crud::PAGE_INDEX, Action::NEW);
 
         // J'active seulement le droit de lecture pour le rôle ADMIN.
-        if ($superAdmin) {
+        if (!$superAdmin) {
             $actions->remove(Crud::PAGE_INDEX, Action::DELETE);
             $actions->remove(Crud::PAGE_DETAIL, Action::DELETE);
 
@@ -93,6 +96,27 @@ class UserCrudController extends AbstractCrudController
 
         return $actions;
     }
+
+
+    /**
+     * Configure des filtres liés aux attributs de l'entité User
+     *
+     * @param Filters $filters L'instance filtre à configurer.
+     *
+     * @return Filters L'instance filtre configurée.
+     */
+    public function configureFilters(Filters $filters): Filters
+{
+    return $filters
+        ->add('id')
+        ->add('name')
+        ->add('isVerified')
+        ->add('email')
+        ;
+}
+
+
+
 
 
 }

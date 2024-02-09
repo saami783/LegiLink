@@ -57,7 +57,7 @@ class RegistrationController extends AbstractController
                     ->from(new Address('support@sami-bahij.com', 'LegiLink'))
                     ->to($user->getEmail())
                     ->subject('Veuillez confirmer votre adresse email.')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('global/registration/confirmation_email.html.twig')
             );
 
             return $userAuthenticator->authenticateUser(
@@ -67,7 +67,7 @@ class RegistrationController extends AbstractController
             );
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('global/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }

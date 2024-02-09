@@ -8,7 +8,7 @@ scheb_two_factor:
         enabled: true
         sender_email: no-reply@sami-bahij.com
         sender_name: LegiLink
-        template: security/2fa_form.html.twig
+        template: global/security/2fa_form.html.twig
         mailer: App\Mailer\AuthCodeMailer
     # Trusted device feature
     trusted_device:
