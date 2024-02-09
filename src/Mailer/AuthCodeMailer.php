@@ -30,10 +30,10 @@ class AuthCodeMailer implements AuthCodeMailerInterface
         if (null === $authCode) return;
 
         $message = (new Email())
-            ->from('no-reply@taskflowui.com')
+            ->from('no-reply@legilinkg.com')
             ->to($user->getEmailAuthRecipient())
             ->subject("Votre code d'authentification")
-            ->html($this->environment->render('security/mails/auth_code.html.twig', ['authCode' => $authCode]));
+            ->html($this->environment->render('global/security/mails/auth_code.html.twig', ['authCode' => $authCode]));
 
 
         if (null !== $this->senderAddress) {

@@ -6,9 +6,9 @@ scheb_two_factor:
     email:
         digits: 6
         enabled: true
-        sender_email: no-reply@taskflowui.com
-        sender_name: TaskFlowUI
-        template: security/2fa_form.html.twig
+        sender_email: no-reply@sami-bahij.com
+        sender_name: LegiLink
+        template: global/security/2fa_form.html.twig
         mailer: App\Mailer\AuthCodeMailer
     # Trusted device feature
     trusted_device:
