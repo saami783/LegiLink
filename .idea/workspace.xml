@@ -5,21 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0784dd7c-844e-44c0-adda-3902912922df" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/user/tools/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/styles/user/dashboard/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/components/admin/footer.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/components/admin/header.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/components/guest/footer.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/components/guest/header.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/components/user/footer.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/components/user/header.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phpspec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phpspec.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Auth/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Auth/ResetPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Auth/SecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/User/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/User/NotificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/User/ToolController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/User/ToolController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/AppCustomAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/AppCustomAuthenticator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/global/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/global/home/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/config/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/config/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/layouts/guest_base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/guest_base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/layouts/security_base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/admin_base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/layouts/user_base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/user_base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/user/dashboard/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/dashboard/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/media/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/media/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/notification/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/notifications/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/tool/index.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +29,9 @@
   </component>
   <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <executable path="composer" />
+    </execution>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -203,6 +206,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "develop",
+    "last_opened_file_path": "/Users/monicasen/LegiLink/templates/components/admin",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -213,6 +217,10 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/components/admin" />
+      <recent name="$PROJECT_DIR$/templates/components/guest" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates/global" />
       <recent name="$PROJECT_DIR$/templates/user" />
@@ -246,6 +254,9 @@
       <workItem from="1707297283976" duration="3409000" />
       <workItem from="1707305785204" duration="2804000" />
       <workItem from="1707483523323" duration="10543000" />
+      <workItem from="1707516052483" duration="377000" />
+      <workItem from="1707516441670" duration="354000" />
+      <workItem from="1707516806140" duration="3565000" />
     </task>
     <servers />
   </component>
