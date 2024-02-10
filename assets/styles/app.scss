@@ -1,5 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 @import '_variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 
@@ -28,5 +29,37 @@
 }
 
 body {
-    background-color: white;
+    font-family: $default-font;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: $dark-blue;
+    font-weight: 500;
+}
+
+p {
+    font-weight: 400;
+    color: $blue-gray;
+}
+
+@media screen and (max-width: $medium-screen) {
+    h1 {
+        font-size: $h2-font-size;
+        line-height: 40px;
+        letter-spacing: 1px;
+        text-align: left;
+    }
+
+    h2 { font-size: $h3-font-size; }
+    h3 { font-size: $h4-font-size; }
+    h4 { font-size: $h5-font-size; }
+    h5 { font-size: $h5-font-size; }
+    h6 { font-size: $base-font-size; }
+    p { font-size: $base-font-size; }
+}
+
+@media (min-width: $large-screen) {
+    .mb-lg-6 { margin-bottom: 4rem; }
+    .mb-lg-7 { margin-bottom: 5rem; }
+    .mb-lg-8 { margin-bottom: 6rem; }
 }

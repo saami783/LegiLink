@@ -1,0 +1,116 @@
+@import '../variables';
+
+// =========================================
+// Home page
+// =========================================
+
+#background{
+  position: absolute;
+  z-index: -1;
+  width: 800px;
+  height: auto;
+  transform: translateY(-90%);
+  top: 100px;
+  right: 0;
+}
+
+#computer{
+  position: relative;
+  width: 500px;
+  height: auto;
+  transform: translateY(-95%);
+}
+
+#downloadIcon {
+  width: 60px;
+  height: auto;
+}
+
+#woman {
+  transform: translateX(25%);
+  width: 450px;
+  height: auto;
+}
+
+#image-container {
+  position: absolute;
+  right: 0;
+}
+
+.image-container {
+  @media screen and (max-width: $medium-screen) {
+    display: none;
+  }
+}
+
+.key-figures-container {
+  background-color: $soft-blue;
+}
+
+.key-figures-container {
+  background-color: $soft-blue;
+  display: flex;
+  align-items: center;
+  height: 160px;
+  margin-top: 6rem;
+  margin-bottom: 4rem;
+}
+
+.key-figure-number {
+  font-family: $secondary-font;
+  font-size: $h2-font-size;
+  line-height: 48px;
+  color: $slate-gray;
+}
+
+.key-figure-text {
+  font-family: $secondary-font;
+  font-size: $h3-font-size;
+  line-height: 48px;
+  letter-spacing: 0.105em;
+  color: $vivid-purple;
+}
+
+// =========================================
+// Header
+// =========================================
+
+#navbar {
+  background-color: transparent;
+  height: 100px;
+}
+
+#connexion {
+  border-radius: 50px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+@media (min-width: $large-screen) {
+  #navbar .container-fluid {
+    width: 1300px;
+  }
+}
+
+// =========================================
+// Footer
+// =========================================
+
+.footer {
+  height: 216px;
+  padding: 20px 0;
+  background-color: $soft-blue;
+  .footer-link {
+    margin: 0 10px;
+    color: $dark-blue;
+    text-decoration: none;
+  }
+  hr {
+    border-color: #ccc;
+  }
+}
+
+@media (min-width: $large-screen) {
+  footer .container {
+    width: 1300px;
+  }
+}
