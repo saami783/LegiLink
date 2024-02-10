@@ -22,4 +22,10 @@
             <li>Your template at <code>C:/Users/sletellier/Desktop/LLK/templates/home/index.html.twig</code></li>
         </ul>
     </div>
+
+    {{ form_start(form) }}
+    {{ form_row(form.file) }}
+    <button type="submit">Upload</button>
+    {{ form_end(form) }}
+
 {% endblock %}
