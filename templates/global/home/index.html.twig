@@ -1,11 +1,86 @@
 {% extends 'layouts/guest_base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
 
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <h1 class="mt-5">Simplifiez votre recherche juridique avec LegiLink</h1>
+                <p>Naviguer dans le dédale des articles de loi peut être un processus fastidieux et chronophage.
+                    LegiLink est conçu pour automatiser et faciliter l'accès aux références légales pour les étudiants,
+                    les professeurs, et les curieux. Notre technologie analyse votre document `.md` et identifie toutes
+                    les mentions d'articles de loi dans un format imposé, pour ensuite rechercher instantanément les
+                    textes correspondants en ligne. Avec LegiLink, enrichissez vos documents de liens directs vers les
+                    articles de loi, épargnez-vous des heures de recherche manuelle, et assurez-vous que vos références
+                    sont précises et à jour.</p>
+                <button class="btn btn-primary">Utiliser l'outil</button>
+                <button class="btn btn-secondary">En savoir plus</button>
+            </div>
 
-    <button class="btn btn-primary">Test Bootstrap</button>
+            <div class="col-md-7">
+                <!-- inclure les images ici -->
+            </div>
+        </div>
+    </div>
+
+    <div class="row key-figures-container text-center justify-content-center">
+        <div class="col-md-2 key-figure-box">
+            <span class="key-figure-number">08</span>
+            <p class="key-figure-text">Étudiants</p>
+        </div>
+
+        <div class="col-md-2 key-figure-box">
+            <span class="key-figure-number">12</span>
+            <p class="key-figure-text">Professeurs</p>
+        </div>
+
+        <div class="col-md-2 key-figure-box">
+            <span class="key-figure-number">52</span>
+            <p class="key-figure-text">Inscrits</p>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="row">
+                    <h2>Découvrez LegiLink</h2>
+                    <p>Transformez votre manière de travailler avec les documents juridiques. LegiLink analyse et enrichit
+                        automatiquement vos fichiers `.md` avec des liens directs vers des articles de loi, vous faisant
+                        économiser des heures de recherche.</p>
+
+                    <div class="row">
+                        <div class="col">
+                            <h3>Simple d’accès</h3>
+                            <p>Il vous suffit de créer un compte sur notre plateforme, récupérer une clé API Google et de
+                                téléverser votre document. Tout le reste on s’en occupe !</p>
+                        </div>
+                        <div class="col">
+                            <h3>Une solution gratuite</h3>
+                            <p>Nous offrons un accès gratuit à notre plateforme. Profitez d'un service essentiel, sans compromis
+                                sur la qualité ou l'accessibilité.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- inclure les images ici -->
+            </div>
+            <div class="col-md-6">
+                <h1 class="mt-5">Intuitif, rapide et puissant</h1>
+                <p>LegiLink marie aisance et célérité, fournissant une plateforme optimisée pour l'incorporation de
+                    références juridiques dans vos documents. Conçue pour l'intuitivité, notre solution permet une
+                    navigation fluide et un accès rapide aux lois, transformant la recherche légale en un processus sans
+                    effort.</p>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
+

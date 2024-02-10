@@ -1,4 +1,31 @@
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
+@import '_variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+// Surcharge des styles bootstrap
+.btn-primary {
+    background-color: $dark-blue;
+    border-color: $dark-blue;
+    border-radius: 4%;
+
+    &:hover, &:focus {
+        background-color: darken($dark-blue, 10%);
+        border-color: darken($dark-blue, 10%);
+    }
+}
+.btn-secondary {
+    background-color: transparent;
+    border-color: $dark-blue;
+    border-radius: 4%;
+    color: $dark-blue;
+
+    &:hover, &:focus {
+        background-color: $dark-blue;
+        color: #fff;
+        border-color: darken($dark-blue, 10%);
+    }
+}
 
 body {
     background-color: white;
