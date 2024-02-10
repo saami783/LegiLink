@@ -22,7 +22,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addStyleEntry('user', './assets/styles/user/dashboard/styles.scss')
-    .addStyleEntry('guest', './assets/styles/guest/home/styles.scss')
+    .addStyleEntry('guest', './assets/styles/guest/styles.scss')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -70,6 +70,9 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
+    .copyFiles({
+        from: './assets/images',
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();
