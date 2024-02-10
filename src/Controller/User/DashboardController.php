@@ -28,6 +28,15 @@ class DashboardController extends AbstractController
             ]);
 
             if ($currentLatestDocument) {
+
+                $projectDir = $this->getParameter('kernel.project_dir');
+
+                $filePath = $projectDir . '/public/uploads/files/' . $currentLatestDocument->getFileName();
+
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+
                 $currentLatestDocument->setIsLastest(false);
                 $entityManager->persist($currentLatestDocument);
             }
@@ -47,5 +56,6 @@ class DashboardController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
 
 }
