@@ -3,14 +3,14 @@
 
     <div class="navbar-nav me-auto ps-lg-5">
       <a class="nav-link" href="/">Accueil</a>
-      <a class="nav-link" href="/about">À propos</a>
-      <a class="nav-link" href="/contact">Contact</a>
+      <a class="nav-link" href="{{ path('app_about') }}">À propos</a>
+      <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
     </div>
 
     <a class="navbar-brand mx-auto" href="/">LegiLink</a>
 
     <div class="ms-auto pe-lg-5">
-      <button id="connexion" class="btn btn-primary" type="button">Connexion/Inscription</button>
+      <a id="connexion" class="btn btn-primary" type="button" href="{{ path('app_login') }}">Connexion/Inscription</a>
     </div>
 
   </div>
