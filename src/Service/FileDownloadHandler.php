@@ -19,20 +19,10 @@ class FileDownloadHandler
         $this->projectDir = $projectDir;
     }
 
-    public function getDownloadResponse($user): BinaryFileResponse
+    public function getDownloadResponse(Document $document): BinaryFileResponse
     {
-        $document = $this->entityManager->getRepository(Document::class)->findOneBy([
-            'user' => $user,
-            'isLastest' => true,
-        ]);
-
-        if (!$document) {
-            throw new NotFoundHttpException('Le fichier demandé n\'existe pas.');
-        }
-
         $fileName = $document->getFileName();
         $filePath = $this->projectDir . '/public/uploads/files/' . $fileName;
-
 
         if (!file_exists($filePath)) {
             throw new NotFoundHttpException('Le fichier demandé n\'existe pas.');

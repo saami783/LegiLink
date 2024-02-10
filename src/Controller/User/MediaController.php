@@ -2,6 +2,8 @@
 
 namespace App\Controller\User;
 
+use App\Entity\Document;
+use App\Security\Voter\DocumentVoter;
 use App\Service\FileDownloadHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,20 +16,35 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MediaController extends AbstractController
 {
+
+    public function __construct(private EntityManagerInterface $entityManager) {
+
+    }
     #[Route('/media', name: 'app_user_media')]
     public function index(): Response
     {
+        $document = $this->entityManager->getRepository(Document::class)->findOneBy([
+            'user' => $this->getUser(),
+            'isLastest' => true,
+        ]);
 
         return $this->render('user/media/index.html.twig', [
-            'controller_name' => 'MediaController',
+            'documentId' => $document ? $document->getId() : null,
         ]);
     }
 
-    #[Route('/download', name: 'app_user_download')]
-    public function download(FileDownloadHandler $downloadHandler): Response
+    #[Route('/download/{id}', name: 'app_user_download')]
+    public function download(FileDownloadHandler $downloadHandler, Document $document): Response
     {
-        $user = $this->getUser();
 
-        return $downloadHandler->getDownloadResponse($user);
+        $this->denyAccessUnlessGranted(DocumentVoter::DOWNLOAD, $document);
+
+        try {
+            return $downloadHandler->getDownloadResponse($document);
+        } catch (NotFoundHttpException $e) {
+            $this->addFlash('error', 'Le fichier demandé n\'existe pas.');
+            return $this->redirectToRoute('app_user_media');
+        }
+
     }
 }

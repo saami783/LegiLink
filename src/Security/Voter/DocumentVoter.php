@@ -2,43 +2,38 @@
 
 namespace App\Security\Voter;
 
+use App\Entity\Document;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class DocumentVoter extends Voter
 {
-    public const EDIT = 'POST_EDIT';
-    public const VIEW = 'POST_VIEW';
+    public const VIEW = 'DOCUMENT_VIEW';
+    public const DELETE = 'DOCUMENT_DELETE';
+    public const DOWNLOAD = 'DOCUMENT_DOWNLOAD';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        // replace with your own logic
-        // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, [self::EDIT, self::VIEW])
-            && $subject instanceof \App\Entity\Document;
+        return in_array($attribute, [self::VIEW, self::DELETE, self::DOWNLOAD])
+            && $subject instanceof Document;
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
-        // if the user is anonymous, do not grant access
         if (!$user instanceof UserInterface) {
             return false;
         }
 
-        // ... (check conditions and return true to grant permission) ...
-        switch ($attribute) {
-            case self::EDIT:
-                // logic to determine if the user can EDIT
-                // return true or false
-                break;
-            case self::VIEW:
-                // logic to determine if the user can VIEW
-                // return true or false
-                break;
-        }
+        /** @var Document $document */
+        $document = $subject;
 
-        return false;
+        return match ($attribute) {
+            self::VIEW, self::DOWNLOAD, self::DELETE => $document->getUser() === $user,
+            default => false,
+        };
+
     }
 }
+
