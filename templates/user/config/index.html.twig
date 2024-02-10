@@ -6,15 +6,43 @@
     <style>
         .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+        .hidden { display: none; }
     </style>
 
     <div class="example-wrapper">
-        <h1>Hello {{ controller_name }}! ✅</h1>
 
-        This friendly message is coming from:
-        <ul>
-            <li>Your controller at <code>C:/Users/sletellier/Desktop/LLK/src/Controller/HomeController.php</code></li>
-            <li>Your template at <code>C:/Users/sletellier/Desktop/LLK/templates/home/index.html.twig</code></li>
-        </ul>
+        <div id="form-success" class="alert alert-success hidden">
+            Paramètres sauvegardés avec succès!
+        </div>
+
+        {{ form_start(form, {'attr': {'id': 'settings-form'}}) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary" type="submit">Sauvegarder</button>
+        <div id="loading" class="hidden">Chargement...</div>
+        {{ form_end(form) }}
     </div>
+
+    <script>
+        document.getElementById('settings-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('loading').classList.remove('hidden');
+
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            }).then(response => response.json())
+                .then(data => {
+                    document.getElementById('form-success').classList.remove('hidden');
+                    document.getElementById('loading').classList.add('hidden');
+                    // Vous pouvez ajouter ici d'autres actions en cas de succès
+                }).catch(error => {
+                console.error('Erreur:', error);
+                document.getElementById('loading').classList.add('hidden');
+                // Gérer l'erreur
+            });
+        });
+    </script>
 {% endblock %}

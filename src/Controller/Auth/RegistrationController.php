@@ -2,6 +2,7 @@
 
 namespace App\Controller\Auth;
 
+use App\Entity\Setting;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\AppCustomAuthenticator;
@@ -11,6 +12,7 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,6 +29,9 @@ class RegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     */
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher,
                              UserAuthenticatorInterface $userAuthenticator, AppCustomAuthenticator $authenticator,
@@ -49,6 +54,11 @@ class RegistrationController extends AbstractController
             );
             $user->setCreatedAt(new \DateTimeImmutable());
             $entityManager->persist($user);
+            $entityManager->flush();
+
+            $setting = new Setting();
+            $setting->setUser($user);
+            $entityManager->persist($setting);
             $entityManager->flush();
 
             // generate a signed url and email it to the user

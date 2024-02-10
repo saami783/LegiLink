@@ -24,6 +24,10 @@ class Setting
     #[ORM\Column(nullable: false)]
     private ?bool $isAutoBlockRequests = false;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +65,18 @@ class Setting
     public function setIsAutoBlockRequests(bool $isAutoBlockRequests): static
     {
         $this->isAutoBlockRequests = $isAutoBlockRequests;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
