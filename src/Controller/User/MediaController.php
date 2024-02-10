@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MediaController extends AbstractController
 {
-    #[Route('/user/media', name: 'app_user_media')]
+    #[Route('/media', name: 'app_user_media')]
     public function index(): Response
     {
         return $this->render('user/media/index.html.twig', [
