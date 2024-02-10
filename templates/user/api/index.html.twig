@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<title>Hello ApiController!</title>
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    {% include '/components/flashes.html.twig' %}
+
+    <div class="example-wrapper">
+        <div class="container">
+            <h1>Configurer votre API</h1>
+            {{ form_start(form) }}
+            {{ form_row(form.apiKey) }}
+            {{ form_row(form.apiSecret) }}
+            {{ form_row(form.isDefault) }}
+            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+            {{ form_end(form) }}
+        </div>
+
+        <h2>Vos configurations API</h2>
+        {% for api in apis %}
+            <div>
+                <p>API Key: {{ api.apiKey }}</p>
+                <p>API Secret: {{ api.apiSecret }}</p>
+                <a href="{{ path('app_user_api_delete', {'id': api.id}) }}" class="btn btn-danger">Supprimer</a>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

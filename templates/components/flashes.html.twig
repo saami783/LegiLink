@@ -1,13 +1,11 @@
-<div class="container message-container">
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ message }}
+{% for flash_message in app.flashes('error') %}
+        <div class="alert alert-danger">
+                {{ flash_message }}
         </div>
-    {% endfor %}
+{% endfor %}
 
-    {% for message in app.flashes('error') %}
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ message }}
+{% for flash_message in app.flashes('success') %}
+        <div class="alert alert-success">
+                {{ flash_message }}
         </div>
-    {% endfor %}
-</div>
+{% endfor %}

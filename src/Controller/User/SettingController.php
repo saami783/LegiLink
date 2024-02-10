@@ -3,19 +3,20 @@
 namespace App\Controller\User;
 
 use App\Entity\Setting;
+use App\Entity\User;
 use App\Form\SettingType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SettingController extends AbstractController
 {
     #[Route('/config', name: 'app_user_setting')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        /** @var User $user */
         $user = $this->getUser();
         $setting = $entityManager->getRepository(Setting::class)->findOneBy(['user' => $user]);
 
