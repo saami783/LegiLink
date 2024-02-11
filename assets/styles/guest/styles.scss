@@ -77,17 +77,48 @@
 }
 
 // =========================================
+// Contact page
+// =========================================
+
+.form-control {
+  margin-bottom: 40px;
+  width: 100%;
+  box-sizing: border-box;
+
+}
+
+#email .form-control {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-bottom-color: $dark-blue;
+  border-radius: 0 0 0 0;
+}
+
+.form-control::placeholder {
+  color: #aaa;
+}
+
+.submit-btn {
+  background-color: #007bff; /* Couleur du fond du bouton */
+  color: white; /* Couleur du texte du bouton */
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3; /* Couleur du fond du bouton au survol */
+}
+
+
+// =========================================
 // Header
 // =========================================
 
 #navbar {
   background-color: transparent;
   height: 100px;
-}
-
-#connexion {
-  border-radius: 50px;
-  box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .opaque-navbar {

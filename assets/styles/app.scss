@@ -16,6 +16,18 @@
     }
 }
 .btn-secondary {
+    background-color: $dark-blue;
+    border-color: $dark-blue;
+    border-radius: 50px;
+    box-shadow: 0 4px 4px 0 #00000040;
+
+    &:hover, &:focus {
+        background-color: transparent;
+        border-color: ($dark-blue, 10%);
+        color: $dark-blue;
+    }
+}
+.btn-outline-primary {
     background-color: transparent;
     border-color: $dark-blue;
     border-radius: 4%;
