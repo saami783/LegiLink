@@ -24,12 +24,14 @@
         <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
     </div>
 
+    <a href="{{ path('app_register') }}">Pas encore inscrit ?</a> <br>
+
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
 
     <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+        Connexion
     </button>
 </form>
 {% endblock %}

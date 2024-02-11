@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class NotificationController extends AbstractController
 {
-    #[Route('/user/notifications', name: 'app_user_notification')]
+    #[Route('/notifications', name: 'app_user_notification')]
     public function index(): Response
     {
         return $this->render('user/notifications/index.html.twig', [

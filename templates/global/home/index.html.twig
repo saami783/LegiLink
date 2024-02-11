@@ -1,20 +1,97 @@
 {% extends 'layouts/guest_base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-md-12 col-lg-4">
+                <h1 class="text-lg-start mb-lg-4" style="margin-top: 100px;">Simplifiez votre recherche juridique avec LegiLink</h1>
+                <p class="mb-lg-4">Naviguer dans le dédale des articles de loi peut être un processus fastidieux et chronophage.
+                    LegiLink est conçu pour automatiser et faciliter l'accès aux références légales pour les étudiants,
+                    les professeurs, et les curieux. Notre technologie analyse votre document `.md` et identifie toutes
+                    les mentions d'articles de loi dans un format imposé, pour ensuite rechercher instantanément les
+                    textes correspondants en ligne. Avec LegiLink, enrichissez vos documents de liens directs vers les
+                    articles de loi, épargnez-vous des heures de recherche manuelle, et assurez-vous que vos références
+                    sont précises et à jour.</p>
+                <div class="text-lg-start">
+                    <button class="btn btn-primary">Utiliser l'outil</button>
+                    <button class="btn btn-outline-primary">En savoir plus</button>
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/sletellier/Desktop/LLK/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Users/sletellier/Desktop/LLK/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+    <div id="image-container" class="image-container">
+        <img id="computer" src="{{ asset('build/home/computer_hp.png') }}" alt="Computer">
+        <img id="background" src="{{ asset('build/home/background_hp.png') }}" alt="Background">
+    </div>
+
+    <div class="row key-figures-container text-center justify-content-lg-center">
+        <div class="col-md-3">
+            <div class="key-figure-number">08</div>
+            <span class="key-figure-text">Étudiants</span>
+        </div>
+
+        <div class="col-md-3">
+            <div class="key-figure-number">12</div>
+            <span class="key-figure-text">Professeurs</span>
+        </div>
+
+        <div class="col-md-3">
+            <div class="key-figure-number">52</div>
+            <span class="key-figure-text">Inscrits</span>
+        </div>
+    </div>
+
+    <div class="container mb-lg-6">
+
+        <div class="row mb-lg-5">
+            <div class="col-lg-5"></div>
+            <div class="col-lg-6 col-md-12">
+                <div class="row">
+                    <h2>Découvrez LegiLink</h2>
+                    <p>Transformez votre manière de travailler avec les documents juridiques. LegiLink analyse et enrichit
+                        automatiquement vos fichiers `.md` avec des liens directs vers des articles de loi, vous faisant
+                        économiser des heures de recherche.</p>
+
+                    <div class="col-lg-1 mb-lg-2 image-container">
+                        <img id="downloadIcon" src="{{ asset('build/home/download_icon.png') }}" alt="Download icon">
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <h4>Simple d’accès</h4>
+                            <p>Il vous suffit de créer un compte sur notre plateforme, récupérer une clé API Google et de
+                                téléverser votre document. Tout le reste on s’en occupe !</p>
+                        </div>
+                        <div class="col">
+                            <h4>Une solution gratuite</h4>
+                            <p>Nous offrons un accès gratuit à notre plateforme. Profitez d'un service essentiel, sans compromis
+                                sur la qualité ou l'accessibilité.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <img id="woman" src="{{ asset('build/home/woman_oncomputer.jpg') }}" alt="Woman on computer illustration">
+            </div>
+            <div class="col-lg-5">
+                <h2 class="mt-5">Intuitif, rapide et puissant</h2>
+                <p>LegiLink marie aisance et célérité, fournissant une plateforme optimisée pour l'incorporation de
+                    références juridiques dans vos documents. Conçue pour l'intuitivité, notre solution permet une
+                    navigation fluide et un accès rapide aux lois, transformant la recherche légale en un processus sans
+                    effort.</p>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+    </div>
+
 {% endblock %}
+

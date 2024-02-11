@@ -42,8 +42,13 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/admin, roles: [ ROLE_ADMIN, ROLE_SUPER_ADMIN ] }
-         - { path: ^/profile, roles: ROLE_USER }
-         - { path: ^/file, roles: ROLE_USER }
+         ###> USER routes ###
+         - { path: ^/dashboard, roles: ROLE_USER }
+         - { path: ^/media, roles: ROLE_USER }
+         - { path: ^/notifications, roles: ROLE_USER }
+         - { path: ^/config, roles: ROLE_USER }
+         - { path: ^/tools, roles: ROLE_USER }
+        ###> USER routes ###
          - { path: ^/2fa, roles: IS_AUTHENTICATED_2FA_IN_PROGRESS }
 
 when@test:

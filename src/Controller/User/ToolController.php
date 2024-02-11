@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ToolController extends AbstractController
 {
-    #[Route('/user/tools', name: 'app_user_tool')]
+    #[Route('/tools', name: 'app_user_tool')]
     public function index(): Response
     {
         return $this->render('user/tools/index.html.twig', [
