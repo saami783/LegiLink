@@ -20,10 +20,14 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+            ->add('email', TextType::class, [
+                'required' => true,
+                'attr' => ['class' => 'form-floating']
+            ])
             ->add('name', TextType::class, [
                 'label' => 'Nom',
                 'required' => true,
+                'attr' => ['class' => 'form-floating']
             ])
             ->add('surname', TextType::class, [
                 'label' => 'Prénom',
@@ -44,6 +48,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => true
             ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => "J'accepte les Conditions d'utilisation et la Politique de Confidentialité du site.",
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -51,7 +56,10 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('save', SubmitType::class, ['label' => 'Inscription'])
+            ->add('save', SubmitType::class, [
+                'label' => "S'inscrire",
+                'attr' => ['class' => 'btn-secondary']
+            ])
         ;
     }
 
