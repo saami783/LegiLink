@@ -1,5 +1,10 @@
 @import '../variables';
 
+.page-content {
+  padding-top: 160px;
+  padding-bottom: 160px;
+}
+
 // =========================================
 // Home page
 // =========================================
@@ -106,6 +111,7 @@
   }
   hr {
     border-color: #ccc;
+    margin-top: 10px;
   }
 }
 
