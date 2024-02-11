@@ -9,3 +9,13 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './styles/app.scss';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+
+document.addEventListener("DOMContentLoaded", function() {
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 50) {
+            document.getElementById('navbar').classList.add('opaque-navbar');
+        } else {
+            document.getElementById('navbar').classList.remove('opaque-navbar');
+        }
+    });
+});

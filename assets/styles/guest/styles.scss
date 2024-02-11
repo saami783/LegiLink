@@ -90,6 +90,12 @@
   box-shadow: 0px 4px 4px 0px #00000040;
 }
 
+.opaque-navbar {
+  background-color: white !important;
+  transition: background-color 0.3s ease-in-out;
+}
+
+
 @media (min-width: $large-screen) {
   #navbar .container-fluid {
     width: 1300px;
