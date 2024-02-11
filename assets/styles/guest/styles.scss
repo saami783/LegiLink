@@ -121,11 +121,16 @@
   height: 100px;
 }
 
+.navbar-brand {
+  color: $blue-gray;
+  font-weight: 700;
+  font-size: $h3-font-size;
+}
+
 .opaque-navbar {
   background-color: white !important;
   transition: background-color 0.3s ease-in-out;
 }
-
 
 @media (min-width: $large-screen) {
   #navbar .container-fluid {
