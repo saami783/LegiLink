@@ -19,25 +19,25 @@
                 {{ form_start(registrationForm) }}
 
                 <div class="form-floating">
-                    {{ form_widget(registrationForm.name, {'attr': {'class': 'form-input', 'placeholder': ' '}}) }}
+                    {{ form_widget(registrationForm.name, {'attr': {'class': 'form-input'}}) }}
                     {{ form_label(registrationForm.name) }}
                 </div>
                 <div class="form-floating">
-                    {{ form_widget(registrationForm.surname, {'attr': {'class': 'form-input', 'placeholder': ' '}}) }}
+                    {{ form_widget(registrationForm.surname, {'attr': {'class': 'form-input'}}) }}
                     {{ form_label(registrationForm.surname) }}
                 </div>
                 <div class="form-floating">
-                    {{ form_widget(registrationForm.email, {'attr': {'class': 'form-input', 'placeholder': ' '}}) }}
+                    {{ form_widget(registrationForm.email, {'attr': {'class': 'form-input'}}) }}
                     {{ form_label(registrationForm.email) }}
                 </div>
                 <div class="form-floating">
-                    {{ form_widget(registrationForm.password, {'attr': {'class': 'form-input', 'placeholder': ' '}}) }}
+                    {{ form_widget(registrationForm.password, {'attr': {'class': 'form-input'}}) }}
                     {{ form_label(registrationForm.password) }}
                 </div>
 
                 <div class="d-lg-flex justify-content-lg-between mb-lg-4">
                     {% for child in registrationForm.profession %}
-                        <div class="">
+                        <div>
                             {{ form_widget(child) }}
                             {{ form_label(child) }}
                         </div>

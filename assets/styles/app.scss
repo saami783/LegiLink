@@ -5,7 +5,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 
+// =========================================
 // Surcharge des styles bootstrap
+// =========================================
+
 .btn-primary {
     background-color: $dark-blue;
     border-color: $dark-blue;
@@ -46,6 +49,10 @@
     }
 }
 
+// =========================================
+// Common
+// =========================================
+
 body {
     font-family: $default-font;
 }
@@ -59,6 +66,10 @@ p {
     font-weight: 400;
     color: $blue-gray;
 }
+
+// =========================================
+// Media Queries
+// =========================================
 
 @media screen and (max-width: $medium-screen) {
     h1 {
