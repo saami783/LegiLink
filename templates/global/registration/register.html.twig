@@ -21,18 +21,22 @@
                 <div class="form-floating">
                     {{ form_widget(registrationForm.name, {'attr': {'class': 'form-input'}}) }}
                     {{ form_label(registrationForm.name) }}
+                    {{ form_errors(registrationForm.name) }}
                 </div>
                 <div class="form-floating">
                     {{ form_widget(registrationForm.surname, {'attr': {'class': 'form-input'}}) }}
                     {{ form_label(registrationForm.surname) }}
+                    {{ form_errors(registrationForm.surname) }}
                 </div>
                 <div class="form-floating">
                     {{ form_widget(registrationForm.email, {'attr': {'class': 'form-input'}}) }}
                     {{ form_label(registrationForm.email) }}
+                    {{ form_errors(registrationForm.email) }}
                 </div>
                 <div class="form-floating">
                     {{ form_widget(registrationForm.password, {'attr': {'class': 'form-input'}}) }}
                     {{ form_label(registrationForm.password) }}
+                    {{ form_errors(registrationForm.password) }}
                 </div>
 
                 <div class="d-lg-flex justify-content-lg-between mb-lg-4">
@@ -51,6 +55,8 @@
                         {{ form_row(registrationForm.save) }}
                     </div>
                 </div>
+
+                {{ form_end(registrationForm) }}
 
                 <p class="text-lg-center">Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Connectez-vous</a></p>
 
