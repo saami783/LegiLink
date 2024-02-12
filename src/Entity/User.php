@@ -11,9 +11,10 @@ use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Cet e-mail est déjà utilisée.')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFactorInterface
 {
     #[ORM\Id]
@@ -22,6 +23,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank(message: 'L\'adresse e-mail est requise.', groups: ['user'])]
+    #[Assert\Email(message: 'Veuillez entrer une adresse e-mail valide.')]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -31,6 +34,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Length(
+        min: 8,
+        max: 4096,
+        minMessage: "Le mot de passe doit contenir au moins {{ limit }} caractères.",
+        maxMessage: "Le mot de passe ne doit pas dépasser {{ limit }} caractères.",
+        groups: ["user"]
+    )]
     private ?string $password = null;
 
     #[ORM\Column(length: 150)]
