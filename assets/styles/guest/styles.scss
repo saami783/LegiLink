@@ -77,14 +77,26 @@
 }
 
 // =========================================
-// Contact page
+// Contact page & Registration page
 // =========================================
 
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label,
+.form-floating>.form-select~label {
+  opacity: 100%;
+  transform: scale(.85) translateY(-2rem) translateX(.15rem);
+}
+
 .form-control {
-  margin-bottom: 40px;
+  label {
+    color: $light-gray;
+  }
+}
+
+.form-control {
+  margin-bottom: 25px;
   width: 100%;
   box-sizing: border-box;
-
 }
 
 #email .form-control {
@@ -99,8 +111,8 @@
 }
 
 .submit-btn {
-  background-color: #007bff; /* Couleur du fond du bouton */
-  color: white; /* Couleur du texte du bouton */
+  background-color: #007bff;
+  color: white;
   padding: 10px 20px;
   border: none;
   cursor: pointer;
@@ -108,7 +120,7 @@
 }
 
 .submit-btn:hover {
-  background-color: #0056b3; /* Couleur du fond du bouton au survol */
+  background-color: #0056b3;
 }
 
 

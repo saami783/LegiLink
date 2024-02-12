@@ -25,6 +25,7 @@ class RegistrationFormType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom',
                 'required' => true,
+                'attr' => ['class' => 'form-floating']
             ])
             ->add('surname', TextType::class, [
                 'label' => 'Prénom',
@@ -45,6 +46,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => true
             ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => "J'accepte les Conditions d'utilisation et la Politique de Confidentialité du site.",
                 'mapped' => false,
                 'label' => 'Accepter les CGU',
                 'constraints' => [
@@ -53,7 +55,10 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('save', SubmitType::class, ['label' => 'Inscription'])
+            ->add('save', SubmitType::class, [
+                'label' => "S'inscrire",
+                'attr' => ['class' => 'btn-secondary']
+            ])
         ;
     }
 
