@@ -50,12 +50,13 @@ class AppCustomAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        if ($this->authorizationChecker->isGranted('ROLE_USER')
-            && !$this->authorizationChecker->isGranted('ROLE_ADMIN')
-            && !$this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
-            return new RedirectResponse($this->urlGenerator->generate('app_home'));
-        } else {
+        if ($this->authorizationChecker->isGranted('ROLE_USER')) {
+            return new RedirectResponse($this->urlGenerator->generate('app_user_dashboard'));
+        } else if ($this->authorizationChecker->isGranted('ROLE_ADMIN')
+            || $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
             return new RedirectResponse($this->urlGenerator->generate('admin'));
+        } else {
+            return new RedirectResponse($this->urlGenerator->generate('app_home'));
         }
 
     }
