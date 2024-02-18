@@ -2,19 +2,33 @@
 
 namespace App\Controller\Auth;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+
+    public function __construct(private AuthorizationCheckerInterface $authorizationChecker, private UrlGeneratorInterface $urlGenerator) {
+
+    }
+
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+         if ($this->getUser()) {
+             if ($this->authorizationChecker->isGranted('ROLE_USER')) {
+                 return new RedirectResponse($this->urlGenerator->generate('app_user_dashboard'));
+             } else if ($this->authorizationChecker->isGranted('ROLE_ADMIN')
+                 || $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
+                 return new RedirectResponse($this->urlGenerator->generate('admin'));
+             }
+         }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

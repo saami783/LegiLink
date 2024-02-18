@@ -1,20 +1,33 @@
-<!DOCTYPE html>
+{% extends 'layouts/guest_base.html.twig' %}
 
-<title>Hello ContactController!</title>
+{% block title %}Contact{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+  <div class="container page-content">
+    <div class="row">
+      <div class="col-md-12 col-lg-4 mx-lg-auto text-lg-center">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/samibahij/Desktop/LegiLink/src/Controller/ContactController.php</code></li>
-        <li>Your template at <code>/Users/samibahij/Desktop/LegiLink/templates/contact/index.html.twig</code></li>
-    </ul>
-</div>
+        <h1 class="mb-lg-5">Contactez-nous</h1>
+
+        {% include 'components/flashes.html.twig' %}
+
+        {{ form_start(form) }}
+
+        <div id="email">
+          {{ form_row(form.email, {'attr': {'placeholder': 'Adresse E-mail', 'class': 'form-control'}}) }}
+        </div>
+        <div>
+          {{ form_row(form.message, {'attr': {'placeholder': 'Votre message ici...', 'class': 'form-control', 'rows': '5'}}) }}
+        </div>
+        <div>
+          {{ form_row(form.save, {'attr': {'class': 'btn btn-secondary', 'style': 'width:100%;'}}) }}
+        </div>
+
+        {{ form_end(form) }}
+
+      </div>
+    </div>
+  </div>
+
 {% endblock %}

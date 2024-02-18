@@ -10,12 +10,15 @@ use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
@@ -24,7 +27,7 @@ class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier)
+    public function __construct(EmailVerifier $emailVerifier, private AuthorizationCheckerInterface $authorizationChecker, private UrlGeneratorInterface $urlGenerator)
     {
         $this->emailVerifier = $emailVerifier;
     }
@@ -37,6 +40,15 @@ class RegistrationController extends AbstractController
                              UserAuthenticatorInterface $userAuthenticator, AppCustomAuthenticator $authenticator,
                              EntityManagerInterface $entityManager): Response
     {
+        if ($this->getUser()) {
+            if ($this->authorizationChecker->isGranted('ROLE_USER')) {
+                return new RedirectResponse($this->urlGenerator->generate('app_user_dashboard'));
+            } else if ($this->authorizationChecker->isGranted('ROLE_ADMIN')
+                || $this->authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
+                return new RedirectResponse($this->urlGenerator->generate('admin'));
+            }
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);

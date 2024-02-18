@@ -10,7 +10,11 @@
     <a class="navbar-brand mx-auto" href="/">LegiLink</a>
 
     <div class="ms-auto pe-lg-5">
-      <a id="connexion" class="btn btn-secondary" type="button" href="{{ path('app_login') }}">Connexion/Inscription</a>
+      {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <a id="dashboard" class="btn btn-secondary" type="button" href="{{ path('app_user_dashboard') }}">Mon Dashboard</a>
+      {% else %}
+        <a id="connexion" class="btn btn-secondary" type="button" href="{{ path('app_login') }}">Connexion/Inscription</a>
+      {% endif %}
     </div>
 
   </div>
