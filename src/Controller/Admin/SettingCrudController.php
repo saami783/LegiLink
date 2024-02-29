@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Setting;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -25,4 +26,10 @@ class SettingCrudController extends AbstractCrudController
         ];
     }
     */
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInPlural('Paramètres établi par les utilisateurs');
+    }
 }

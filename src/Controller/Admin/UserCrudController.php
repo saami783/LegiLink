@@ -106,17 +106,20 @@ class UserCrudController extends AbstractCrudController
      * @return Filters L'instance filtre configurée.
      */
     public function configureFilters(Filters $filters): Filters
-{
-    return $filters
-        ->add('id')
-        ->add('name')
-        ->add('isVerified')
-        ->add('email')
-        ;
-}
+    {
+        return $filters
+            ->add('id')
+            ->add('name')
+            ->add('isVerified')
+            ->add('email')
+            ;
+    }
 
-
-
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInPlural('Utilisateurs');
+    }
 
 
 }
