@@ -21,7 +21,10 @@ Encore
      * and one CSS file (e.g. app.scss) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
-    .addStyleEntry('user', './assets/styles/user/dashboard/styles.scss')
+    .addEntry('user_app', './assets/js/user/app.js')
+
+    .addStyleEntry('sidenav', './assets/styles/user/sidebar.scss')
+
     .addStyleEntry('guest', './assets/styles/guest/styles.scss')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
@@ -57,6 +60,11 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
+    .enablePostCssLoader((options) => {
+        options.postcssOptions = {
+            path: './postcss.config.js'
+        };
+    })
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
