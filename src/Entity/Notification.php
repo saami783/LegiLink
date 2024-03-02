@@ -23,7 +23,7 @@ class Notification
     private ?string $message = null;
 
     #[ORM\Column(nullable: false)]
-    private ?\DateTimeInterface $createdAt = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: false)]
     private ?bool $isNew = true;
@@ -57,12 +57,12 @@ class Notification
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 
@@ -79,5 +79,9 @@ class Notification
         $this->isNew = $isNew;
 
         return $this;
+    }
+
+    public function __toString() : string {
+        return $this->message;
     }
 }

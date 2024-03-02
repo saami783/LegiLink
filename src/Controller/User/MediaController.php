@@ -28,6 +28,8 @@ class MediaController extends AbstractController
             'isLastest' => true,
         ]);
 
+        $this->entityManager->close();
+
         return $this->render('user/media/index.html.twig', [
             'documentId' => $document ? $document->getId() : null,
         ]);

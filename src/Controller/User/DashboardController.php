@@ -9,9 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\UpdateFileService;
 
 class DashboardController extends AbstractController
 {
+
+    public function __construct(private UpdateFileService $fileService) { }
+
     #[Route('/dashboard', name: 'app_user_dashboard')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -48,7 +52,14 @@ class DashboardController extends AbstractController
 
             $this->addFlash('success', 'Fichier uploadé avec succès.');
 
-            return $this->redirectToRoute('app_user_dashboard');
+            try{
+//                die();
+//                $this->fileService->updateFile($currentLatestDocument->getFileName());
+            }catch (\Exception $e) {
+
+            }
+
+            return $this->redirectToRoute('app_user_media');
         }
 
         return $this->render('user/dashboard/index.html.twig', [
