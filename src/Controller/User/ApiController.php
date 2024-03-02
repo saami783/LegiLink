@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ApiController extends AbstractController
 {
-    #[Route('/api', name: 'app_user_api')]
+    #[Route('/config/api', name: 'app_user_api')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
