@@ -23,9 +23,10 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('user_app', './assets/js/user/app.js')
 
-    .addStyleEntry('sidenav', './assets/styles/user/sidebar.scss')
+    .addStyleEntry('sidenav', './assets/styles/user/sidenav.scss')
 
     .addStyleEntry('guest', './assets/styles/guest/styles.scss')
+    .addStyleEntry('faq', './assets/styles/guest/faq.scss')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

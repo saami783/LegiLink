@@ -1,0 +1,54 @@
+.icon-fixed-size {
+  width: 24px; // Taille fixe pour les icônes
+  height: 24px;
+  margin-right: 12px; // Espace entre l'icône et le texte
+}
+
+.nav-link {
+  @apply flex items-center p-4 text-gray-700; // Texte plus foncé pour une meilleure visibilité
+
+  &:hover {
+    @apply bg-blue-100 text-blue-700;
+  }
+
+  &.active {
+    @apply bg-blue-500 text-white;
+  }
+}
+
+.sidenav-header {
+  @apply flex items-center justify-between p-4 border-b; // Ajoute une bordure en bas du header sidenav
+  // Styles pour le texte ou logo LegiLink
+  .legilink-logo, .legilink-text {
+    @apply text-lg font-bold; // Augmente la taille du texte et le rend gras
+  }
+
+  .legilink-logo {
+    @apply hidden; // Cache le logo par défaut
+  }
+
+  // Affiche le logo lorsque la sidenav est pliée
+  &[data-te-sidenav-slim-collapsed='true'] .legilink-logo {
+    @apply block;
+  }
+  // Cache le texte lorsque la sidenav est pliée
+  &[data-te-sidenav-slim-collapsed='true'] .legilink-text {
+    @apply hidden;
+  }
+}
+
+.custom-nav-size {
+  width: 292.29px;
+  height: 976.94px;
+}
+
+
+[data-te-sidenav-link-ref] {
+  justify-content: start; /* Assure que les icônes et le texte sont alignés au début */
+  gap: 10px; /* Espacement entre l'icône et le texte */
+  color: #4A5568; /* Couleur de texte plus claire pour un meilleur contraste */
+}
+
+[data-te-sidenav-link-ref]:hover {
+  background-color: #F7FAFC; /* Couleur de fond au survol plus claire */
+}
