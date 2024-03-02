@@ -23,7 +23,6 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('user_app', './assets/js/user/app.js')
 
-    .addStyleEntry('sidebar', './assets/styles/user/sidebar.scss')
     .addStyleEntry('sidenav', './assets/styles/user/sidebar.scss')
 
     .addStyleEntry('guest', './assets/styles/guest/styles.scss')
