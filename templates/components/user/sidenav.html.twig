@@ -12,14 +12,14 @@
 
 <nav
         id="sidenav-4"
-        class="custom-nav-size group fixed left-0 top-0 z-[1035] overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] data-[te-sidenav-slim='true']:hidden data-[te-sidenav-slim-collapsed='true']:w-[77px] data-[te-sidenav-slim='true']:w-[77px] data-[te-sidenav-hidden='false']:translate-x-0 dark:bg-zinc-800 [&[data-te-sidenav-slim-collapsed='true'][data-te-sidenav-slim='false']]:hidden [&[data-te-sidenav-slim-collapsed='true'][data-te-sidenav-slim='true']]:[display:unset]"
+        class="custom-nav-size group fixed left-0 top-0 z-[1035] overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] flex flex-col"
         data-te-sidenav-init
         data-te-sidenav-hidden="false"
         data-te-sidenav-mode="side"
         data-te-sidenav-slim="true"
         data-te-sidenav-content="#slim-content"
         data-te-sidenav-slim-collapsed="true"
-        >
+>
 
     <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
 
@@ -105,24 +105,27 @@
                 >
             </a>
         </li>
-
-        <li class="relative">
-            <a
-                    style="background-color: #667A8A;"
-                    href="{{ path('app_logout') }}"
-                    class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                    data-te-sidenav-link-ref>
-                <img src="{{ asset('build/sidebar_icons/logout.png') }}" alt="Home" class="icon-fixed-size h-4 w-4"/>
-                <span
-                        style="color: white;"
-                        class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
-                        data-te-sidenav-slim="false"
-                >Déconnexion</span
-                >
-            </a>
-        </li>
-
     </ul>
+
+    <div class="mt-auto w-full">
+        <ul class="list-none p-0 m-0">
+            <li class="relative">
+                <a
+                        style="background-color: #667A8A;"
+                        href="{{ path('app_logout') }}"
+                        class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-white outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit focus:bg-slate-50 focus:text-inherit active:bg-slate-50 active:text-inherit data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none"
+                        data-te-sidenav-link-ref>
+                    <img src="{{ asset('build/sidebar_icons/logout.png') }}" alt="Déconnexion" class="icon-fixed-size h-4 w-4"/>
+                    <span
+                            class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
+                            data-te-sidenav-slim="false"
+                    >Déconnexion</span
+                    >
+                </a>
+            </li>
+        </ul>
+    </div>
+
 </nav>
 <!-- Sidenav -->
 
