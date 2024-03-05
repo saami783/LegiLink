@@ -2,6 +2,7 @@
 
 namespace App\Security\Voter;
 
+use App\Entity\Notification;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -28,7 +29,7 @@ class NotificationVoter extends Voter
         }
 
         // On s'assure que $subject est bien une instance de Notification
-        if (!$subject instanceof \App\Entity\Notification) {
+        if (!$subject instanceof Notification) {
             throw new \LogicException('Le voteur ne supporte que les instances de Notification.');
         }
 
@@ -40,11 +41,17 @@ class NotificationVoter extends Voter
         throw new \LogicException('Cet attribut n\'est pas supporté !');
     }
 
-    private function canView(\App\Entity\Notification $notification, UserInterface $user): bool
+    private function canView(Notification $notification, UserInterface $user): bool
     {
-        // Autoriser la visualisation si l'utilisateur est le propriétaire de la notification
-        return $user === $notification->getUser();
+        foreach ($notification->getUsers() as $userNotification) {
+            if ($user === $userNotification) {
+                return true;
+            }
+        }
+
+        return false;
     }
+
 
 
 }

@@ -33,8 +33,9 @@ class NotificationController extends AbstractController
     #[Route('/notifications', name: 'app_user_notification')]
     public function index(): Response
     {
+        /** @var User $user */
         $user = $this->getUser();
-        $notifications = $this->entityManager->getRepository(Notification::class)->findBy(['user' => $user]);
+        $notifications = $user->getNotifications();
 
         $this->entityManager->close();
 
@@ -43,8 +44,8 @@ class NotificationController extends AbstractController
         ]);
     }
 
-    #[Route('/notifications/{user}/{notification}', name: 'app_user_detail_notification')]
-    public function detail(User $user, Notification $notification) : Response {
+    #[Route('/notifications/{notification}', name: 'app_user_detail_notification')]
+    public function detail(Notification $notification) : Response {
 
         $this->denyAccessUnlessGranted('NOTIFICATION_VIEW', $notification);
 
@@ -55,7 +56,9 @@ class NotificationController extends AbstractController
         $this->entityManager->close();
 
         return $this->render('user/notifications/detail.html.twig',
-        ['notifaction' => $notification]);
+        [
+            'notifaction' => $notification
+        ]);
     }
 
 }

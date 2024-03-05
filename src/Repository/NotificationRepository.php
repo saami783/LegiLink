@@ -32,11 +32,13 @@ class NotificationRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('n')
             ->select('COUNT(n.id)')
-            ->where('n.user = :user')
+            ->join('n.users', 'u')
+            ->where('u.id = :userId')
             ->andWhere('n.isNew = :isNew')
-            ->setParameter('user', $user)
+            ->setParameter('userId', $user->getId())
             ->setParameter('isNew', true)
             ->getQuery()
             ->getSingleScalarResult();
     }
+
 }
