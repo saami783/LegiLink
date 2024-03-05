@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Notification;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -36,6 +38,12 @@ class NotificationCrudController extends AbstractCrudController
         $notification->setCreatedAt(new \DateTimeImmutable());
 
         return $notification;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->add(Crud::PAGE_INDEX, Crud::PAGE_DETAIL);
     }
 
 

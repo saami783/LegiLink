@@ -10,10 +10,25 @@
 
     <div class="example-wrapper">
 
-        {% for notification in notifications %}
-             <p> Message : {{ notification.message }} ~ Est nouveau ? {{ notification.isNew }} ~ {{ notification.createdAt|date("d/m/Y") }}</p>
+        {% if notifications|length == 0 %}
+            <p class="message no-reservation">Vous n'avez aucune notification pour le moment.</p>
+        {% else %}
+            {% for notification in notifications %}
+                <p>
+                    {{ notification.message|slice(0, 50) ~ '...' }}
+                    le {{ notification.createdAt|date("d/m/Y à H:i:s") }}
+                    {% if notification.isNew %}
+                        <span
+                                class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700 dark:bg-slate-900 dark:text-primary-500"
+                        >Nouveau</span>
+                    {% endif %}
+                    <a href="{{ path('app_user_detail_notification', {'user': app.user.id, 'notification': notification.id}) }}">
+                        Lire la suite >
+                    </a>
+                </p>
+            {% endfor %}
 
-        {% endfor %}
+        {% endif %}
 
     </div>
 {% endblock %}

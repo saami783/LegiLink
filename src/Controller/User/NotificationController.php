@@ -16,7 +16,9 @@ class NotificationController extends AbstractController
 
     public function __construct(private EntityManagerInterface $entityManager,
                                 private NotificationRepository $notificationRepository,
-                                private Security $security) { }
+                                private Security $security) {
+
+    }
 
     #[Route('/notifications/count', name: 'notifications_count')]
     public function count(): Response
@@ -40,4 +42,20 @@ class NotificationController extends AbstractController
           'notifications' => $notifications
         ]);
     }
+
+    #[Route('/notifications/{user}/{notification}', name: 'app_user_detail_notification')]
+    public function detail(User $user, Notification $notification) : Response {
+
+        $this->denyAccessUnlessGranted('NOTIFICATION_VIEW', $notification);
+
+        $notification->setIsNew(false);
+
+        $this->entityManager->persist($notification);
+        $this->entityManager->flush();
+        $this->entityManager->close();
+
+        return $this->render('user/notifications/detail.html.twig',
+        ['notifaction' => $notification]);
+    }
+
 }

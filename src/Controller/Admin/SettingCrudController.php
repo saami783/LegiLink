@@ -39,12 +39,10 @@ class SettingCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $actions
-            ->disable(Action::NEW)
-            ->disable(Action::DELETE)
-            ->add(Crud::PAGE_INDEX, Crud::PAGE_DETAIL, Crud::PAGE_EDIT);
-
-        return $actions;
+        return $actions
+                ->disable(Action::NEW)
+                ->disable(Action::DELETE)
+                ->add(Crud::PAGE_INDEX, Crud::PAGE_DETAIL);
     }
 
     public function configureCrud(Crud $crud): Crud

@@ -40,10 +40,9 @@ class DocumentCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $actions
-            ->disable(Action::DELETE, Action::NEW, Action::EDIT)
-            ->add(Crud::PAGE_INDEX, Crud::PAGE_DETAIL);
-        return $actions;
+        return $actions
+                ->disable(Action::DELETE, Action::NEW, Action::EDIT)
+                ->add(Crud::PAGE_INDEX, Crud::PAGE_DETAIL);
     }
 
 
