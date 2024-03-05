@@ -64,7 +64,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Notification::class, orphanRemoval: true)]
+    #[ORM\ManyToMany(targetEntity: Notification::class, mappedBy: 'users')]
     private Collection $notifications;
 
     public function __construct()
@@ -253,6 +253,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
         return $this;
     }
+    public function __toString() : string {
+        return $this->email;
+    }
 
     /**
      * @return Collection<int, Notification>
@@ -266,7 +269,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     {
         if (!$this->notifications->contains($notification)) {
             $this->notifications->add($notification);
-            $notification->setUser($this);
+            $notification->addUser($this);
         }
 
         return $this;
@@ -275,10 +278,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function removeNotification(Notification $notification): static
     {
         if ($this->notifications->removeElement($notification)) {
-            // set the owning side to null (unless already changed)
-            if ($notification->getUser() === $this) {
-                $notification->setUser(null);
-            }
+            $notification->removeUser($this);
         }
 
         return $this;

@@ -13,11 +13,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ApiController extends AbstractController
 {
-    #[Route('/api', name: 'app_user_api')]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+
+    public function __construct(private EntityManagerInterface $entityManager) {}
+
+    #[Route('/config/api', name: 'app_user_api')]
+    public function index(Request $request): Response
     {
         $user = $this->getUser();
-        $apis = $entityManager->getRepository(Api::class)->findBy(['user' => $user]);
+        $apis = $this->entityManager->getRepository(Api::class)->findBy(['user' => $user]);
 
         $newApi = new Api();
         $form = $this->createForm(ApiFormType::class, $newApi);
@@ -30,10 +33,12 @@ class ApiController extends AbstractController
                 $this->denyAccessUnlessGranted(ApiVoter::NEW, $newApi);
 
                 $newApi->setUser($user);
-                $entityManager->persist($newApi);
-                $entityManager->flush();
+                $this->entityManager->persist($newApi);
+                $this->entityManager->flush();
 
                 $this->addFlash('success', 'La nouvelle configuration API a été ajoutée avec succès.');
+
+                $this->entityManager->close();
 
                 return $this->redirectToRoute('app_user_api');
             }
@@ -45,12 +50,13 @@ class ApiController extends AbstractController
     }
 
     #[Route('/api/delete/{id}', name: 'app_user_api_delete')]
-    public function delete(Api $api, EntityManagerInterface $entityManager): Response
+    public function delete(Api $api): Response
     {
         $this->denyAccessUnlessGranted(ApiVoter::DELETE, $api);
 
-        $entityManager->remove($api);
-        $entityManager->flush();
+        $this->entityManager->remove($api);
+        $this->entityManager->flush();
+        $this->entityManager->close();
 
         $this->addFlash('success', 'La configuration API a été supprimée avec succès.');
 

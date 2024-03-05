@@ -16,6 +16,7 @@ class ApiFormType extends AbstractType
     {
         $builder
             ->add('isDefault', CheckboxType::class, [
+                'required' => false,
                 'label' => 'Utiliser cette API par défaut'
             ])
             ->add('apiKey')

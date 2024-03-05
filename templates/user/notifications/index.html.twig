@@ -1,4 +1,4 @@
-{% extends 'layouts/user_base.html.twig' %}
+{% extends 'components/user/sidenav.html.twig' %}
 
 {% block title %}Hello HomeController!{% endblock %}
 
@@ -9,12 +9,26 @@
     </style>
 
     <div class="example-wrapper">
-        <h1>Hello {{ controller_name }}! ✅</h1>
 
-        This friendly message is coming from:
-        <ul>
-            <li>Your controller at <code>C:/Users/sletellier/Desktop/LLK/src/Controller/HomeController.php</code></li>
-            <li>Your template at <code>C:/Users/sletellier/Desktop/LLK/templates/home/index.html.twig</code></li>
-        </ul>
+        {% if notifications|length == 0 %}
+            <p class="message no-reservation">Vous n'avez aucune notification pour le moment.</p>
+        {% else %}
+            {% for notification in notifications %}
+                <p>
+                    {{ notification.message|slice(0, 50) ~ '...' }}
+                    le {{ notification.createdAt|date("d/m/Y à H:i:s") }}
+                    {% if notification.isNew %}
+                        <span
+                                class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700 dark:bg-slate-900 dark:text-primary-500"
+                        >Nouveau</span>
+                    {% endif %}
+                    <a href="{{ path('app_user_detail_notification', {'notification': notification.id}) }}">
+                        Lire la suite >
+                    </a>
+                </p>
+            {% endfor %}
+
+        {% endif %}
+
     </div>
 {% endblock %}

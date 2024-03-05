@@ -67,16 +67,9 @@ class MessageContactCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $actions->add(Crud::PAGE_INDEX, Action::DETAIL);
-
-//        /** @var User $user */
-//        $user = $this->getUser();
-//
-//        if (in_array('ROLE_FAKE_ADMIN', $user->getRoles())) {
-//            $actions->disable(Action::DELETE, Action::EDIT, Action::NEW);
-//        }
-
-        return $actions;
+        return $actions
+                ->add(Crud::PAGE_INDEX, Action::DETAIL)
+                ->disable(Action::DELETE);
     }
 
 

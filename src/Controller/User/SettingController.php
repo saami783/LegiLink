@@ -13,12 +13,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SettingController extends AbstractController
 {
+    public function __construct(private EntityManagerInterface $entityManager) {}
+
     #[Route('/config', name: 'app_user_setting')]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    public function index(Request $request): Response
     {
         /** @var User $user */
         $user = $this->getUser();
-        $setting = $entityManager->getRepository(Setting::class)->findOneBy(['user' => $user]);
+        $setting = $this->entityManager->getRepository(Setting::class)->findOneBy(['user' => $user]);
 
         if (!$setting) {
             $setting = new Setting();
@@ -33,8 +35,9 @@ class SettingController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->denyAccessUnlessGranted('SETTING_EDIT', $setting);
 
-            $entityManager->persist($setting);
-            $entityManager->flush();
+            $this->entityManager->persist($setting);
+            $this->entityManager->flush();
+            $this->entityManager->close();
 
             $this->addFlash('success', 'Paramètres sauvegardés avec succès.');
 

@@ -1,5 +1,10 @@
 {% extends 'layouts/guest_base.html.twig' %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('faq') }}
+{% endblock %}
+
 {% block title %}Contact{% endblock %}
 
 {% block body %}

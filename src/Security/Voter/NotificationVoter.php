@@ -2,6 +2,7 @@
 
 namespace App\Security\Voter;
 
+use App\Entity\Notification;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -9,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class NotificationVoter extends Voter
 {
     public const EDIT = 'POST_EDIT';
-    public const VIEW = 'POST_VIEW';
+    public const VIEW = 'NOTIFICATION_VIEW';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
@@ -22,23 +23,35 @@ class NotificationVoter extends Voter
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
-        // if the user is anonymous, do not grant access
+        // Si l'utilisateur est anonyme, ne pas autoriser l'accès
         if (!$user instanceof UserInterface) {
             return false;
         }
 
-        // ... (check conditions and return true to grant permission) ...
+        // On s'assure que $subject est bien une instance de Notification
+        if (!$subject instanceof Notification) {
+            throw new \LogicException('Le voteur ne supporte que les instances de Notification.');
+        }
+
         switch ($attribute) {
-            case self::EDIT:
-                // logic to determine if the user can EDIT
-                // return true or false
-                break;
             case self::VIEW:
-                // logic to determine if the user can VIEW
-                // return true or false
-                break;
+                return $this->canView($subject, $user);
+        }
+
+        throw new \LogicException('Cet attribut n\'est pas supporté !');
+    }
+
+    private function canView(Notification $notification, UserInterface $user): bool
+    {
+        foreach ($notification->getUsers() as $userNotification) {
+            if ($user === $userNotification) {
+                return true;
+            }
         }
 
         return false;
     }
+
+
+
 }
