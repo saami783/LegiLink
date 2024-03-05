@@ -67,7 +67,9 @@ class MessageContactCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $actions->add(Crud::PAGE_INDEX, Action::DETAIL);
+        $actions
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->disable(Action::DELETE);
 
 //        /** @var User $user */
 //        $user = $this->getUser();

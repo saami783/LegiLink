@@ -2,8 +2,11 @@
 
 namespace App\Controller\User;
 
+use App\Entity\User;
+use App\Repository\NotificationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Notification;
@@ -11,7 +14,19 @@ use App\Entity\Notification;
 class NotificationController extends AbstractController
 {
 
-    public function __construct(private EntityManagerInterface $entityManager) { }
+    public function __construct(private EntityManagerInterface $entityManager,
+                                private NotificationRepository $notificationRepository,
+                                private Security $security) { }
+
+    #[Route('/notifications/count', name: 'notifications_count')]
+    public function count(): Response
+    {
+        /** @var User $user */
+        $user = $this->security->getUser();
+        $count = $this->notificationRepository->countNewNotifications($user);
+
+        return new Response($count);
+    }
 
     #[Route('/notifications', name: 'app_user_notification')]
     public function index(): Response

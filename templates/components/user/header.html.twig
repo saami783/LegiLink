@@ -57,9 +57,12 @@
                     <!-- Notification counter -->
                     <span
                             class="absolute -mt-4 ml-2.5 rounded-full bg-danger px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-white"
-                    >24</span
-                    {# @TODO Mettre le nombre de notifications en dynamique ! #}
+                            data-controller-url="{{ path('notifications_count') }}"
                     >
+                        {{ render(controller('App\\Controller\\User\\NotificationController::count')) }}
+
+                    </span>
+
                 </a>
                 <!-- First dropdown menu -->
                 <ul
@@ -124,3 +127,16 @@
         </div>
     </div>
 </nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setInterval(function() {
+            fetch('/notifications/count')
+                .then(response => response.text())
+                .then(count => {
+                    document.querySelector('[data-controller-url]').textContent = count;
+                });
+        }, 60000);
+    });
+
+</script>
