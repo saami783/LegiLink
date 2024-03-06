@@ -64,12 +64,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\ManyToMany(targetEntity: Notification::class, mappedBy: 'users')]
-    private Collection $notifications;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: NotificationUser::class)]
+    private Collection $notificationUser;
 
     public function __construct()
     {
-        $this->notifications = new ArrayCollection();
+        $this->notificationUser = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -258,29 +258,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     }
 
     /**
-     * @return Collection<int, Notification>
+     * @return Collection<int, NotificationUser>
      */
-    public function getNotifications(): Collection
+    public function getNotificationUser(): Collection
     {
-        return $this->notifications;
+        return $this->notificationUser;
     }
 
-    public function addNotification(Notification $notification): static
+    public function addNotificationUser(NotificationUser $notificationUser): static
     {
-        if (!$this->notifications->contains($notification)) {
-            $this->notifications->add($notification);
-            $notification->addUser($this);
+        if (!$this->notificationUser->contains($notificationUser)) {
+            $this->notificationUser->add($notificationUser);
+            $notificationUser->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeNotification(Notification $notification): static
+    public function removeNotificationUser(NotificationUser $notificationUser): static
     {
-        if ($this->notifications->removeElement($notification)) {
-            $notification->removeUser($this);
+        if ($this->notificationUser->removeElement($notificationUser)) {
+            // set the owning side to null (unless already changed)
+            if ($notificationUser->getUser() === $this) {
+                $notificationUser->setUser(null);
+            }
         }
 
         return $this;
     }
+
 }

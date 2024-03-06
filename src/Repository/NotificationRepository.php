@@ -21,24 +21,4 @@ class NotificationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Notification::class);
     }
-
-    /**
-     * Count new notifications for a given user.
-     *
-     * @param User $user The user for whom to count new notifications.
-     * @return int The number of new notifications.
-     */
-    public function countNewNotifications(User $user): int
-    {
-        return $this->createQueryBuilder('n')
-            ->select('COUNT(n.id)')
-            ->join('n.users', 'u')
-            ->where('u.id = :userId')
-            ->andWhere('n.isNew = :isNew')
-            ->setParameter('userId', $user->getId())
-            ->setParameter('isNew', true)
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
 }
