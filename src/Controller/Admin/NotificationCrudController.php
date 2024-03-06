@@ -28,13 +28,11 @@ class NotificationCrudController extends AbstractCrudController
         return Notification::class;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->hideOnForm(),
             TextareaField::new('message'),
-            DateField::new('createdAt', 'Envoyé le')->hideOnForm()->setFormat('dd.MM.yyyy hh:mm')->setTimezone('Europe/Paris'),
             ChoiceField::new('category', 'Catégorie concernée')
                 ->setChoices(ProfessionNotificationEnum::getValues())
                 ->setRequired(true)
@@ -45,7 +43,9 @@ class NotificationCrudController extends AbstractCrudController
                     'choice_value' => function ($choice) {
                         return $choice;
                     },
-                ]),
+                ])->onlyOnForms(),
+            TextField::new('category')->hideOnForm(),
+            DateField::new('createdAt', 'Envoyé le')->hideOnForm()->setFormat('dd.MM.yyyy hh:mm')->setTimezone('Europe/Paris'),
         ];
     }
 
