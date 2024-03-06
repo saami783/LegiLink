@@ -26,6 +26,9 @@ class Notification
     #[ORM\OneToMany(mappedBy: 'notification', targetEntity: NotificationUser::class)]
     private Collection $notificationUsers;
 
+    #[ORM\Column(length: 15)]
+    private ?string $category = null;
+
     public function __construct()
     {
         $this->notificationUsers = new ArrayCollection();
@@ -87,4 +90,27 @@ class Notification
 
         return $this;
     }
+
+    public function addNotificationUser(NotificationUser $notificationUser): self
+    {
+        if (!$this->notificationUsers->contains($notificationUser)) {
+            $this->notificationUsers[] = $notificationUser;
+            $notificationUser->setNotification($this);
+        }
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): static
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
 }
