@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Notification;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -28,7 +29,6 @@ class NotificationCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextareaField::new('message'),
-            AssociationField::new('users', 'Utilisateurs'),
             DateField::new('createdAt', 'Envoyé le')->hideOnForm()->setFormat('dd.MM.yyyy hh:mm')->setTimezone('Europe/Paris')
         ];
     }
@@ -46,7 +46,6 @@ class NotificationCrudController extends AbstractCrudController
         return $actions
             ->add(Crud::PAGE_INDEX, Crud::PAGE_DETAIL);
     }
-
 
     public function configureCrud(Crud $crud): Crud
     {

@@ -23,15 +23,12 @@ class Notification
     #[ORM\Column(nullable: false)]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(nullable: false)]
-    private ?bool $isNew = true;
-
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'notifications')]
-    private Collection $users;
+    #[ORM\OneToMany(mappedBy: 'notification', targetEntity: NotificationUser::class)]
+    private Collection $notificationUsers;
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->notificationUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -63,18 +60,6 @@ class Notification
         return $this;
     }
 
-    public function isIsNew(): ?bool
-    {
-        return $this->isNew;
-    }
-
-    public function setIsNew(bool $isNew): static
-    {
-        $this->isNew = $isNew;
-
-        return $this;
-    }
-
     public function __toString() : string {
         return $this->message;
     }
@@ -82,23 +67,23 @@ class Notification
     /**
      * @return Collection<int, User>
      */
-    public function getUsers(): Collection
+    public function getNotificationUser(): Collection
     {
-        return $this->users;
+        return $this->notificationUsers;
     }
 
-    public function addUser(User $user): static
+    public function addUser(NotificationUser $notificationUser): static
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
+        if (!$this->notificationUsers->contains($notificationUser)) {
+            $this->notificationUsers->add($notificationUser);
         }
 
         return $this;
     }
 
-    public function removeUser(User $user): static
+    public function removeNotificationUser(NotificationUser $notificationUser): static
     {
-        $this->users->removeElement($user);
+        $this->notificationUsers->removeElement($notificationUser);
 
         return $this;
     }

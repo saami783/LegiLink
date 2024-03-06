@@ -4,6 +4,7 @@ namespace App\Controller\User;
 
 use App\Entity\User;
 use App\Repository\NotificationRepository;
+use App\Repository\NotificationUserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -15,6 +16,7 @@ class NotificationController extends AbstractController
 {
 
     public function __construct(private EntityManagerInterface $entityManager,
+                                private NotificationUserRepository $notificationUserRepository,
                                 private NotificationRepository $notificationRepository,
                                 private Security $security) {
 
@@ -25,40 +27,53 @@ class NotificationController extends AbstractController
     {
         /** @var User $user */
         $user = $this->security->getUser();
-        $count = $this->notificationRepository->countNewNotifications($user);
+        $count = $this->notificationUserRepository->countNewNotifications($user);
 
         return new Response($count);
     }
 
     #[Route('/notifications', name: 'app_user_notification')]
-    public function index(): Response
+    public function index(NotificationUserRepository $notificationUserRepository): Response
     {
         /** @var User $user */
         $user = $this->getUser();
-        $notifications = $user->getNotifications();
 
-        $this->entityManager->close();
+        $notificationUsers = $notificationUserRepository->findBy(['user' => $user]);
+
+        $notificationsWithReadStatus = [];
+        foreach ($notificationUsers as $notificationUser) {
+            $notificationsWithReadStatus[] = [
+                'notification' => $notificationUser->getNotification(),
+                'isRead' => $notificationUser->isRead()
+            ];
+        }
 
         return $this->render('user/notifications/index.html.twig', [
-          'notifications' => $notifications
+            'notificationsWithReadStatus' => $notificationsWithReadStatus
         ]);
     }
+
 
     #[Route('/notifications/{notification}', name: 'app_user_detail_notification')]
-    public function detail(Notification $notification) : Response {
-
+    public function detail(Notification $notification, NotificationUserRepository $notificationUserRepository): Response {
         $this->denyAccessUnlessGranted('NOTIFICATION_VIEW', $notification);
 
-        $notification->setIsNew(false);
+        $notificationUser = $notificationUserRepository->findOneBy([
+            'notification' => $notification,
+            'user' => $this->getUser()
+        ]);
 
-        $this->entityManager->persist($notification);
-        $this->entityManager->flush();
-        $this->entityManager->close();
+        if ($notificationUser) {
+            $notificationUser->setRead(true);
+            $this->entityManager->persist($notificationUser);
+            $this->entityManager->flush();
+        }
+         $this->entityManager->close();
 
-        return $this->render('user/notifications/detail.html.twig',
-        [
-            'notifaction' => $notification
+        return $this->render('user/notifications/detail.html.twig', [
+            'notification' => $notification
         ]);
     }
+
 
 }

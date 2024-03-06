@@ -3,9 +3,7 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-
-    <p> {{ notifaction.id }}</p>
-    <p> {{ notifaction.message }}</p>
-    <p> {{ notifaction.isNew }}</p>
-    <p> {{ notifaction.createdAt|date("d/m/Y " ~ "à" ~ " H:i:s") }} </p>
+    <p> {{ notification.id }}</p>
+    <p> {{ notification.message }}</p>
+    <p> {{ notification.createdAt|date("d/m/Y à H:i:s") }} </p>
 {% endblock %}
