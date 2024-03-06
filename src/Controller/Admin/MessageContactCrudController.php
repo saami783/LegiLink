@@ -24,7 +24,6 @@ class MessageContactCrudController extends AbstractCrudController
         return MessageContact::class;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -69,7 +68,9 @@ class MessageContactCrudController extends AbstractCrudController
     {
         return $actions
                 ->add(Crud::PAGE_INDEX, Action::DETAIL)
-                ->disable(Action::DELETE);
+                ->disable(Action::DELETE)
+                ->disable(Action::NEW)
+            ;
     }
 
 
