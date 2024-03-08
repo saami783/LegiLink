@@ -27,6 +27,9 @@
                 <p>API Key: {{ api.apiKey }}</p>
                 <p>API Secret: {{ api.apiSecret }}</p>
                 <a href="{{ path('app_user_api_delete', {'id': api.id}) }}" class="btn btn-danger">Supprimer</a>
+                {% if api.isDefault == false %}
+                    <a href="{{ path('app_user_api_update', {'id': api.id}) }}" class="btn btn-primary">Utiliser par défaut</a>
+                {% endif %}
             </div>
         {% endfor %}
     </div>

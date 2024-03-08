@@ -4,15 +4,7 @@
 
 {% block body %}
 
-    <div class="container message-container">
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success alert-dismissible fade show flash-message role="alert"">
-        {{ message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-    {% endfor %}
+    {% include '/components/flashes.html.twig' %}
 
     {% for message in app.flashes('error') %}
         <div class="alert alert-danger alert-dismissible fade show flash-message" role="alert">
@@ -51,7 +43,7 @@
             <p>Une fois votre compte supprimé, toutes ses ressources et données seront définitivement supprimées.
                 Avant de supprimer votre compte, veuillez télécharger toutes les données ou informations que vous
                 souhaitez conserver.</p>
-            <a href="{{ path('app_profil_delete') }}" class="btn-danger btn-outline-danger">Supprimer mon compte</a>
+            <a href="{{ path('app_profil_delete') }}" class="btn btn-danger">Supprimer mon compte</a>
         </div>
 
     </div>

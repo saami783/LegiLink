@@ -47,7 +47,8 @@ security:
          - { path: ^/media, roles: ROLE_USER }
          - { path: ^/notifications, roles: ROLE_USER }
          - { path: ^/config, roles: ROLE_USER }
-         - { path: ^/tools, roles: ROLE_USER }
+         - { path: ^/api, roles: ROLE_USER }
+         - { path: ^/profil, roles: ROLE_USER }
         ###> USER routes ###
          - { path: ^/2fa, roles: IS_AUTHENTICATED_2FA_IN_PROGRESS }
 
