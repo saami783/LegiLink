@@ -11,6 +11,7 @@ namespace App\Service;
 
 use App\Entity\Api;
 use App\Entity\Document;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -51,10 +52,10 @@ class UpdateFileService extends AbstractController
      *
      * @return bool Retourne true si le fichier a été mis à jour avec succès.
      */
-    public function updateFile(): bool
+    public function updateFile(Api $api, User $user): bool
     {
         $currentLatestDocument = $this->entityManager->getRepository(Document::class)->findOneBy([
-            'user' => $this->getUser(),
+            'user' => $user,
             'isLastest' => true,
         ]);
 
@@ -86,7 +87,7 @@ class UpdateFileService extends AbstractController
                         $articleType = $match[1] ?? '';
                         $articleNumber = $match[2];
                         $formattedString = "Article " . $articleType . $articleNumber . " " . $full;
-                        $searchResults = $this->searchGoogle($formattedString);
+                        $searchResults = $this->searchGoogle($formattedString, $api);
 
                         if (!empty($searchResults)) {
                             $legifranceLink = $this->findLegifranceLink($searchResults);
@@ -120,15 +121,9 @@ class UpdateFileService extends AbstractController
      * @param string $query La requête de recherche.
      * @return array Tableau des résultats de recherche; tableau vide si erreur.
      */
-    private function searchGoogle(string $query): array
+    private function searchGoogle(string $query, Api $api): array
     {
         $url = 'https://www.googleapis.com/customsearch/v1';
-
-        /** @var Api $api */
-        $api = $this->entityManager->getRepository(Api::class)->findOneBy([
-            'user' => $this->getUser(),
-            'isDefault' => true
-        ]);
 
         try {
             $response = $this->client->request('GET', $url, [

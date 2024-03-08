@@ -36,9 +36,12 @@ class ApiController extends AbstractController
                     /** @var Api $oldApi */
                     $oldApi = $this->entityManager->getRepository(Api::class)->findOneBy(['isDefault' => true]);
 
-                    $oldApi->setIsDefault(false);
-                    $this->entityManager->persist($oldApi);
-                    $this->entityManager->flush();
+                    if(!is_null($oldApi)) {
+                        $oldApi->setIsDefault(false);
+                        $this->entityManager->persist($oldApi);
+                        $this->entityManager->flush();
+                    }
+
                 }
 
                 $newApi->setUser($user);
