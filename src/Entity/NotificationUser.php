@@ -14,13 +14,14 @@ class NotificationUser
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Notification::class, inversedBy: 'notificationUsers')]
+    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private ?Notification $notification = null;
 
     #[ORM\Column(type: 'boolean')]
     private bool $isRead = false;
 
     #[ORM\ManyToOne(inversedBy: 'notificationUser')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private ?User $user = null;
 
     public function getId(): ?int

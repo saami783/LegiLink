@@ -52,9 +52,11 @@ class ProfilController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{user}', name: 'app_profil_delete')]
-    public function delete(User $user) : Response {
+    #[Route('/delete', name: 'app_profil_delete')]
+    public function delete() : Response {
 
+        /** @var User $user */
+        $user = $this->getUser();
         $this->userRepository->remove($user, true);
 
         return $this->redirectToRoute('app_home');
