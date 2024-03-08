@@ -43,19 +43,13 @@ class NotificationUserRepository extends ServiceEntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function findNotificationsByUser(User $user)
+    public function findNotificationsForUser(User $user): \Doctrine\ORM\Query
     {
-        $entityManager = $this->getEntityManager();
-
-        $dql = "SELECT n FROM App\Entity\Notification n
-            INNER JOIN App\Entity\NotificationUser nu WITH nu.notification = n
-            WHERE nu.user = :user";
-
-        $query = $entityManager->createQuery($dql)
-            ->setParameter('user', $user);
-
-        return $query->getResult();
+        return $this->createQueryBuilder('nu')
+            ->innerJoin('nu.notification', 'n')
+            ->andWhere('nu.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('n.createdAt', 'DESC')
+            ->getQuery();
     }
-
-
 }
