@@ -9,6 +9,7 @@
 
 namespace App\Service;
 
+use App\Entity\Api;
 use App\Entity\Document;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,10 +18,6 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class UpdateFileService extends AbstractController
 {
-
-    /** Ne divulge pas ce fichier, il y a mes clés secrète API */
-    private string $apiKey = "";
-    private string $searchEngineId = "";
 
     /**
      * Liste des abbréviations des codes. C'est ici que tu les rajoutes si t'en as d'autres.
@@ -127,11 +124,17 @@ class UpdateFileService extends AbstractController
     {
         $url = 'https://www.googleapis.com/customsearch/v1';
 
+        /** @var Api $api */
+        $api = $this->entityManager->getRepository(Api::class)->findOneBy([
+            'user' => $this->getUser(),
+            'isDefault' => true
+        ]);
+
         try {
             $response = $this->client->request('GET', $url, [
                 'query' => [
-                    'key' => $this->apiKey,
-                    'cx' => $this->searchEngineId,
+                    'key' => $api->getApiKey(),
+                    'cx' => $api->getApiSecret(),
                     'q' => $query,
                 ]
             ]);
