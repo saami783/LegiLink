@@ -7,39 +7,10 @@
     {% include '/components/flashes.html.twig' %}
 
     <div class="example-wrapper">
-
-        <div id="form-success" class="alert alert-success hidden">
-            Paramètres sauvegardés avec succès!
-        </div>
-
         {{ form_start(form, {'attr': {'id': 'settings-form'}}) }}
         {{ form_widget(form) }}
         <button class="btn btn-primary" type="submit">Sauvegarder</button>
-        <div id="loading" class="hidden">Chargement...</div>
         {{ form_end(form) }}
     </div>
 
-    <script>
-        document.getElementById('settings-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('loading').classList.remove('hidden');
-
-            fetch(this.action, {
-                method: 'POST',
-                body: new FormData(this),
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                }
-            }).then(response => response.json())
-                .then(data => {
-                    document.getElementById('form-success').classList.remove('hidden');
-                    document.getElementById('loading').classList.add('hidden');
-                    // Vous pouvez ajouter ici d'autres actions en cas de succès
-                }).catch(error => {
-                console.error('Erreur:', error);
-                document.getElementById('loading').classList.add('hidden');
-                // Gérer l'erreur
-            });
-        });
-    </script>
 {% endblock %}

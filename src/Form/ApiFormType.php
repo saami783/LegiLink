@@ -7,6 +7,7 @@ use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,8 +20,14 @@ class ApiFormType extends AbstractType
                 'required' => false,
                 'label' => 'Utiliser cette API par défaut'
             ])
-            ->add('apiKey')
-            ->add('apiSecret')
+            ->add('apiKey', TextType::class, [
+                'label' => 'Clé API',
+                'required' => true
+            ])
+            ->add('apiSecret', TextType::class, [
+                'label' => 'Id Search Engine',
+                'required' => true
+            ])
         ;
     }
 
