@@ -28,6 +28,9 @@ class Setting
     #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private ?User $user = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $totalRequestSent = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +80,18 @@ class Setting
     public function setUser(User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getTotalRequestSent(): ?int
+    {
+        return $this->totalRequestSent;
+    }
+
+    public function setTotalRequestSent(?int $totalRequestSent): static
+    {
+        $this->totalRequestSent = $totalRequestSent;
 
         return $this;
     }

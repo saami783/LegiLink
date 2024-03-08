@@ -4,6 +4,12 @@
         </div>
 {% endfor %}
 
+{% for flash_message in app.flashes('warning') %}
+        <div class="alert alert-warning">
+                {{ flash_message }}
+        </div>
+{% endfor %}
+
 {% for flash_message in app.flashes('success') %}
         <div class="alert alert-success">
                 {{ flash_message }}

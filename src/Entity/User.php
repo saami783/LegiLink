@@ -67,9 +67,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: NotificationUser::class)]
     private Collection $notificationUser;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: ApiExecution::class, orphanRemoval: true)]
+    private Collection $apiExecutions;
+
     public function __construct()
     {
         $this->notificationUser = new ArrayCollection();
+        $this->apiExecutions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -281,6 +285,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
             // set the owning side to null (unless already changed)
             if ($notificationUser->getUser() === $this) {
                 $notificationUser->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ApiExecution>
+     */
+    public function getApiExecutions(): Collection
+    {
+        return $this->apiExecutions;
+    }
+
+    public function addApiExecution(ApiExecution $apiExecution): static
+    {
+        if (!$this->apiExecutions->contains($apiExecution)) {
+            $this->apiExecutions->add($apiExecution);
+            $apiExecution->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApiExecution(ApiExecution $apiExecution): static
+    {
+        if ($this->apiExecutions->removeElement($apiExecution)) {
+            // set the owning side to null (unless already changed)
+            if ($apiExecution->getUser() === $this) {
+                $apiExecution->setUser(null);
             }
         }
 
