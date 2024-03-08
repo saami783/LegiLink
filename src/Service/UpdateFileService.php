@@ -10,7 +10,9 @@
 namespace App\Service;
 
 use App\Entity\Api;
+use App\Entity\ApiExecution;
 use App\Entity\Document;
+use App\Entity\Setting;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,10 +36,12 @@ class UpdateFileService extends AbstractController
         'CSI' => 'code de la sécurité intérieure',
     ];
 
+    private int $count = 0;
+
     /** Injecte le client HTTP pour pouvoir effectuer des requêtes. */
-    public function __construct(private HttpClientInterface $client,
+    public function __construct(private HttpClientInterface    $client,
                                 private EntityManagerInterface $entityManager,
-                                private ParameterBagInterface $params)
+                                private ParameterBagInterface  $params)
     {
     }
 
@@ -52,8 +56,14 @@ class UpdateFileService extends AbstractController
      *
      * @return bool Retourne true si le fichier a été mis à jour avec succès.
      */
-    public function updateFile(Api $api, User $user): bool
+    public function updateFile(Api $api, User $user, Setting $setting): bool
     {
+
+        $apiExecution = new ApiExecution();
+        $apiExecution->setExecutedAt(new \DateTimeImmutable());
+        $apiExecution->setUser($user);
+        $apiExecution->setExecution(1);
+
         $currentLatestDocument = $this->entityManager->getRepository(Document::class)->findOneBy([
             'user' => $user,
             'isLastest' => true,
@@ -87,7 +97,7 @@ class UpdateFileService extends AbstractController
                         $articleType = $match[1] ?? '';
                         $articleNumber = $match[2];
                         $formattedString = "Article " . $articleType . $articleNumber . " " . $full;
-                        $searchResults = $this->searchGoogle($formattedString, $api);
+                        $searchResults = $this->searchGoogle($formattedString, $api, $setting);
 
                         if (!empty($searchResults)) {
                             $legifranceLink = $this->findLegifranceLink($searchResults);
@@ -102,6 +112,15 @@ class UpdateFileService extends AbstractController
 
             $updatedLines[] = $lineUpdated;
         }
+
+        $setting->setTotalRequestSent($setting->getTotalRequestSent() + $this->count);
+
+        $apiExecution->setRequest($setting->getTotalRequestSent());
+        $this->entityManager->persist($apiExecution);
+        $this->entityManager->flush();
+
+        $this->entityManager->persist($setting);
+        $this->entityManager->flush();
 
         $updatedContent = implode("\n", $updatedLines);
         $result = file_put_contents($filePath, $updatedContent);
@@ -121,7 +140,7 @@ class UpdateFileService extends AbstractController
      * @param string $query La requête de recherche.
      * @return array Tableau des résultats de recherche; tableau vide si erreur.
      */
-    private function searchGoogle(string $query, Api $api): array
+    private function searchGoogle(string $query, Api $api, Setting $setting): array
     {
         $url = 'https://www.googleapis.com/customsearch/v1';
 
@@ -134,12 +153,14 @@ class UpdateFileService extends AbstractController
                 ]
             ]);
 
+            // Après une requête réussie, je mets à jour le nombre de requêtes envoyées
+            $this->count += 1;
+
             return $response->toArray();
         } catch (\Exception $e) {
             return [];
         }
     }
-
 
     /**
      * Extrait un lien vers Legifrance des résultats de recherche Google.

@@ -5,6 +5,27 @@
 {% block body %}
     {% include '/components/flashes.html.twig' %}
 
+    <h2>Statistiques du tableau de bord</h2>
+
+
+    <div>
+        <h3>Dernières 24 heures</h3>
+        <p>Nombre total d'exécutions : {{ statistics.last_24_hours.executions }}</p>
+        <p>Nombre total de requêtes : {{ statistics.last_24_hours.requests }}</p>
+        <p>Nombre de requêtes restantes pour la journée : {{ statistics.last_24_hours.remaining_requests }}</p>
+    </div>
+
+    <div>
+        <h3>Derniers 7 jours</h3>
+        <p>Nombre total d'exécutions : {{ statistics.last_7_days.executions }}</p>
+        <p>Nombre total de requêtes : {{ statistics.last_7_days.requests }}</p>
+    </div>
+
+    <div>
+        <h3>Derniers 30 jours</h3>
+        <p>Nombre total d'exécutions : {{ statistics.last_30_days.executions }}</p>
+        <p>Nombre total de requêtes : {{ statistics.last_30_days.requests }}</p>
+    </div>
 
     {{ form_start(form) }}
     {{ form_row(form.file) }}

@@ -4,8 +4,10 @@ namespace App\Controller\User;
 
 use App\Entity\Api;
 use App\Entity\Document;
+use App\Entity\Setting;
 use App\Entity\User;
 use App\Form\FileType;
+use App\Service\StatisticsService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +20,8 @@ class DashboardController extends AbstractController
 {
 
     public function __construct(private UpdateFileService $fileService,
-                                private EntityManagerInterface $entityManager) { }
+                                private EntityManagerInterface $entityManager,
+                                private StatisticsService $statisticsService) { }
 
 
     /**
@@ -30,27 +33,38 @@ class DashboardController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
+        /** @var Setting $setting */
+        $setting = $this->entityManager->getRepository(Setting::class)->findOneBy(['user' => $user]);
+
         $document = new Document();
         $form = $this->createForm(FileType::class, $document);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if($this->formTreatment($user, $entityManager, $document)) {
+            if($this->formTreatment($user, $entityManager, $document, $setting)) {
                 return $this->redirectToRoute('app_user_media');
             } else {
                 return $this->redirectToRoute('app_user_dashboard');
             }
         }
 
-            return $this->render('user/dashboard/index.html.twig', [
-                'form' => $form->createView(),
+        if($setting->getDailyRequestLimit() - $setting->getTotalRequestSent() >= 1
+            && $setting->getDailyRequestLimit() - $setting->getTotalRequestSent() <= 20) {
+            $this->addFlash('warning', "Vous avez presque atteint la limite quotidienne de requêtes, pensez à activer le blocage automatique 🚫");
+        }
+
+        $statistics = $this->statisticsService->getStatistics($user, $setting->getDailyRequestLimit());
+
+        return $this->render('user/dashboard/index.html.twig', [
+            'form' => $form->createView(),
+            'statistics' => $statistics
             ]);
         }
 
     /**
      * @throws Exception
      */
-    private function formTreatment(User $user, EntityManagerInterface $entityManager, Document $document) : bool
+    private function formTreatment(User $user, EntityManagerInterface $entityManager, Document $document, Setting $setting) : bool
         {
 
             /** @var Api $api */
@@ -88,10 +102,14 @@ class DashboardController extends AbstractController
             $entityManager->persist($document);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Fichier uploadé avec succès.');
+            if($setting->getDailyRequestLimit() - $setting->getTotalRequestSent() <= 0 && $setting->isIsAutoBlockRequests()) {
+                $this->addFlash('error', 'Vous avez atteint la limite de requêtes quotidienne.');
+                return false;
+            }
+            $this->addFlash('success', 'Votre fichier est prêt à être télécharger ! ');
 
             try {
-                $this->fileService->updateFile($api, $user);
+                $this->fileService->updateFile($api, $user, $setting);
                 return true;
             } catch (Exception $e) {
                 return false;
