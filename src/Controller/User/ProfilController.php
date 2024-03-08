@@ -8,10 +8,14 @@ use App\Form\ChangePasswordFormType;
 use App\Form\User\InfoUserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 class ProfilController extends AbstractController
 {
@@ -54,8 +58,13 @@ class ProfilController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     #[Route('/delete', name: 'app_profil_delete')]
-    public function delete() : Response {
+    public function delete( SessionInterface $session,
+                            TokenStorageInterface $tokenStorage) : Response {
 
         /** @var User $user */
         $user = $this->getUser();
@@ -74,10 +83,12 @@ class ProfilController extends AbstractController
                 unlink($filePath);
             }
         }
+        $this->container->get('security.token_storage')->setToken(null);
 
         $this->userRepository->remove($user, true);
 
         return $this->redirectToRoute('app_home');
     }
+
 
 }
