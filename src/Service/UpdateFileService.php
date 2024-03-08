@@ -9,14 +9,15 @@
 
 namespace App\Service;
 
+use App\Entity\Api;
+use App\Entity\Document;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-class UpdateFileService
+class UpdateFileService extends AbstractController
 {
-
-    /** Ne divulge pas ce fichier, il y a mes clés secrète API */
-    private string $apiKey;
-    private string $searchEngineId;
 
     /**
      * Liste des abbréviations des codes. C'est ici que tu les rajoutes si t'en as d'autres.
@@ -33,7 +34,9 @@ class UpdateFileService
     ];
 
     /** Injecte le client HTTP pour pouvoir effectuer des requêtes. */
-    public function __construct(private HttpClientInterface $client)
+    public function __construct(private HttpClientInterface $client,
+                                private EntityManagerInterface $entityManager,
+                                private ParameterBagInterface $params)
     {
     }
 
@@ -48,10 +51,19 @@ class UpdateFileService
      *
      * @return bool Retourne true si le fichier a été mis à jour avec succès.
      */
-    public function updateFile(string $filePath): bool
+    public function updateFile(): bool
     {
-        $filename = dirname(__FILE__, 3) . '/Lexique.md';
-        $content = file_get_contents($filename);
+        $currentLatestDocument = $this->entityManager->getRepository(Document::class)->findOneBy([
+            'user' => $this->getUser(),
+            'isLastest' => true,
+        ]);
+
+        $projectDir = $this->getParameter('upload_directory');
+
+        $filePath = $projectDir . '/' . $currentLatestDocument->getFileName();
+
+        $content = file_get_contents($filePath);
+
         if ($content === false) {
             error_log("Erreur lors de la lecture du fichier.");
             return false;
@@ -91,7 +103,7 @@ class UpdateFileService
         }
 
         $updatedContent = implode("\n", $updatedLines);
-        $result = file_put_contents($filename, $updatedContent);
+        $result = file_put_contents($filePath, $updatedContent);
         if ($result === false) {
             error_log("Erreur lors de l'écriture dans le fichier.");
             return false;
@@ -112,11 +124,17 @@ class UpdateFileService
     {
         $url = 'https://www.googleapis.com/customsearch/v1';
 
+        /** @var Api $api */
+        $api = $this->entityManager->getRepository(Api::class)->findOneBy([
+            'user' => $this->getUser(),
+            'isDefault' => true
+        ]);
+
         try {
             $response = $this->client->request('GET', $url, [
                 'query' => [
-                    'key' => $this->apiKey,
-                    'cx' => $this->searchEngineId,
+                    'key' => $api->getApiKey(),
+                    'cx' => $api->getApiSecret(),
                     'q' => $query,
                 ]
             ]);

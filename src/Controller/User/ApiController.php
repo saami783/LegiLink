@@ -32,6 +32,15 @@ class ApiController extends AbstractController
             } else if ($form->isValid()) {
                 $this->denyAccessUnlessGranted(ApiVoter::NEW, $newApi);
 
+                if($newApi->isIsDefault()) {
+                    /** @var Api $oldApi */
+                    $oldApi = $this->entityManager->getRepository(Api::class)->findOneBy(['isDefault' => true]);
+
+                    $oldApi->setIsDefault(false);
+                    $this->entityManager->persist($oldApi);
+                    $this->entityManager->flush();
+                }
+
                 $newApi->setUser($user);
                 $this->entityManager->persist($newApi);
                 $this->entityManager->flush();
@@ -62,4 +71,10 @@ class ApiController extends AbstractController
 
         return $this->redirectToRoute('app_user_api');
     }
+
+    #[Route('api/update/{id}', name: 'app_user_api_update')]
+    public function update(Api $api) {
+
+    }
+    
 }

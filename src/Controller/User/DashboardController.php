@@ -53,8 +53,7 @@ class DashboardController extends AbstractController
             $this->addFlash('success', 'Fichier uploadé avec succès.');
 
             try{
-//                die();
-//                $this->fileService->updateFile($currentLatestDocument->getFileName());
+                $this->fileService->updateFile();
             }catch (\Exception $e) {
 
             }

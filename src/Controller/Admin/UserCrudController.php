@@ -112,6 +112,8 @@ class UserCrudController extends AbstractCrudController
             ->add('name')
             ->add('isVerified')
             ->add('email')
+            ->add(ChoiceFilter::new('profession')
+                ->setChoices(ProfessionEnum::getValues()))
             ;
     }
 
