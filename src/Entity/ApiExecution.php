@@ -23,6 +23,9 @@ class ApiExecution
     #[ORM\Column]
     private ?int $execution = null;
 
+    #[ORM\Column]
+    private ?int $request = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class ApiExecution
     public function setExecution(int $execution): static
     {
         $this->execution = $execution;
+
+        return $this;
+    }
+
+    public function getRequest(): ?int
+    {
+        return $this->request;
+    }
+
+    public function setRequest(int $request): static
+    {
+        $this->request = $request;
 
         return $this;
     }

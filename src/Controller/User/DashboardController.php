@@ -7,6 +7,7 @@ use App\Entity\Document;
 use App\Entity\User;
 use App\Form\FileType;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +20,10 @@ class DashboardController extends AbstractController
     public function __construct(private UpdateFileService $fileService,
                                 private EntityManagerInterface $entityManager) { }
 
+
+    /**
+     * @throws Exception
+     */
     #[Route('/dashboard', name: 'app_user_dashboard')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -30,6 +35,23 @@ class DashboardController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($this->formTreatment($user, $entityManager, $document)) {
+                return $this->redirectToRoute('app_user_media');
+            } else {
+                return $this->redirectToRoute('app_user_dashboard');
+            }
+        }
+
+            return $this->render('user/dashboard/index.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
+
+    /**
+     * @throws Exception
+     */
+    private function formTreatment(User $user, EntityManagerInterface $entityManager, Document $document) : bool
+        {
 
             /** @var Api $api */
             $api = $this->entityManager->getRepository(Api::class)->findOneBy([
@@ -39,7 +61,7 @@ class DashboardController extends AbstractController
 
             if (is_null($api)) {
                 $this->addFlash('error', 'Vous devez définir une clé API par défaut pour upload un fichier.');
-                return $this->redirectToRoute('app_user_dashboard');
+                return false;
             }
 
             $currentLatestDocument = $entityManager->getRepository(Document::class)->findOneBy([
@@ -68,18 +90,14 @@ class DashboardController extends AbstractController
 
             $this->addFlash('success', 'Fichier uploadé avec succès.');
 
-            try{
+            try {
                 $this->fileService->updateFile($api, $user);
-            }catch (\Exception $e) {
-
+                return true;
+            } catch (Exception $e) {
+                return false;
             }
-            return $this->redirectToRoute('app_user_media');
-        }
 
-        return $this->render('user/dashboard/index.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
+        }
 
 
 }
