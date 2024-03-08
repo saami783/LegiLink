@@ -49,8 +49,9 @@ class DashboardController extends AbstractController
         }
 
         if($setting->getDailyRequestLimit() - $setting->getTotalRequestSent() >= 1
-            && $setting->getDailyRequestLimit() - $setting->getTotalRequestSent() <= 20) {
-            $this->addFlash('warning', "Vous avez presque atteint la limite quotidienne de requêtes, pensez à activer le blocage automatique 🚫");
+            && $setting->getDailyRequestLimit() - $setting->getTotalRequestSent() <= 20
+            && !$setting->isIsAutoBlockRequests()) {
+            $this->addFlash('warning', "Vous êtes sur le point d'atteindre votre limite quotidienne de requêtes. Pour éviter tout dépassement, envisagez d'activer le blocage automatique des requêtes 🚫");
         }
 
         $statistics = $this->statisticsService->getStatistics($user, $setting->getDailyRequestLimit());

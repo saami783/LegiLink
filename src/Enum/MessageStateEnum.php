@@ -16,13 +16,13 @@ enum MessageStateEnum
     public static function getValues(): array
     {
         return [
-            self::NON_LU,
-            self::EN_ATTENTE,
-            self::A_SUIVRE,
-            self::URGENT,
-            self::EN_COURS_DE_TRAITEMENT,
-            self::ANNULEE,
-            self::VALIDEE,
+            self::NON_LU => self::NON_LU,
+            self::EN_ATTENTE => self::EN_ATTENTE,
+            self::A_SUIVRE => self::A_SUIVRE,
+            self::URGENT => self::URGENT,
+            self::EN_COURS_DE_TRAITEMENT => self::EN_COURS_DE_TRAITEMENT,
+            self::ANNULEE => self::ANNULEE,
+            self::VALIDEE => self::VALIDEE,
         ];
     }
 

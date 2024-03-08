@@ -59,7 +59,8 @@ class MessageContactCrudController extends AbstractCrudController
             ->add('id')
             ->add('email')
             ->add('sentAt')
-            ->add(ChoiceFilter::new('state')->setChoices(array_flip(MessageStateEnum::getValues())))
+            ->add(ChoiceFilter::new('state')
+                ->setChoices(MessageStateEnum::getValues()))
             ;
     }
 
