@@ -2,10 +2,12 @@
 
 namespace App\Controller\User;
 
+use App\Entity\Document;
 use App\Entity\User;
 use App\Form\ChangePasswordFormType;
 use App\Form\User\InfoUserType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class ProfilController extends AbstractController
 {
 
-    public function __construct(private UserRepository $userRepository) { }
+    public function __construct(private UserRepository $userRepository, private EntityManagerInterface $entityManager) { }
 
     #[Route('/profil', name: 'app_profil')]
     public function index(Request $request, UserRepository $userRepository): Response
@@ -57,6 +59,22 @@ class ProfilController extends AbstractController
 
         /** @var User $user */
         $user = $this->getUser();
+
+        $currentLatestDocument = $this->entityManager->getRepository(Document::class)->findOneBy([
+            'user' => $user,
+            'isLastest' => true,
+        ]);
+
+        if($currentLatestDocument) {
+            $projectDir = $this->getParameter('kernel.project_dir');
+
+            $filePath = $projectDir . '/public/uploads/files/' . $currentLatestDocument->getFileName();
+
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+
         $this->userRepository->remove($user, true);
 
         return $this->redirectToRoute('app_home');
