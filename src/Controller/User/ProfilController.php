@@ -2,19 +2,25 @@
 
 namespace App\Controller\User;
 
+use App\Entity\Document;
 use App\Entity\User;
 use App\Form\ChangePasswordFormType;
-use App\Form\User\InfoUserType;
+use App\Form\InfoUserType;
 use App\Repository\UserRepository;
-use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 class ProfilController extends AbstractController
 {
 
-    public function __construct(private UserRepository $userRepository) { }
+    public function __construct(private UserRepository $userRepository, private EntityManagerInterface $entityManager) { }
 
     #[Route('/profil', name: 'app_profil')]
     public function index(Request $request, UserRepository $userRepository): Response
@@ -52,14 +58,37 @@ class ProfilController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     #[Route('/delete', name: 'app_profil_delete')]
-    public function delete() : Response {
+    public function delete( SessionInterface $session,
+                            TokenStorageInterface $tokenStorage) : Response {
 
         /** @var User $user */
         $user = $this->getUser();
+
+        $currentLatestDocument = $this->entityManager->getRepository(Document::class)->findOneBy([
+            'user' => $user,
+            'isLastest' => true,
+        ]);
+
+        if($currentLatestDocument) {
+            $projectDir = $this->getParameter('kernel.project_dir');
+
+            $filePath = $projectDir . '/public/uploads/files/' . $currentLatestDocument->getFileName();
+
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+        $this->container->get('security.token_storage')->setToken(null);
+
         $this->userRepository->remove($user, true);
 
         return $this->redirectToRoute('app_home');
     }
+
 
 }
