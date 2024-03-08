@@ -1,1 +1,59 @@
 {% extends 'components/user/sidenav.html.twig' %}
+
+{% block title %}Mon profil {% endblock %}
+
+{% block body %}
+
+    <div class="container message-container">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible fade show flash-message role="alert"">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger alert-dismissible fade show flash-message" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+    </div>
+
+    <div class="example-wrapper">
+        <div class="container">
+            <h1>Informations du compte</h1>
+            <p>Mettez à jour les informations de profil et l’adresse e-mail de votre compte.</p>
+            {{ form_start(infoForm) }}
+            {{ form_row(infoForm.email) }}
+            {{ form_row(infoForm.name) }}
+            {{ form_row(infoForm.surname) }}
+            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+            {{ form_end(infoForm) }}
+        </div>
+
+        <div class="container">
+            <h1>Mettre à jour le mot de passe</h1>
+            <p>Assurez-vous que votre compte utilise un mot de passe long et aléatoire pour rester
+                sécurisé.</p>
+            {{ form_start(passwordForm) }}
+            {{ form_row(passwordForm.plainPassword) }}
+            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+            {{ form_end(passwordForm) }}
+        </div>
+
+        <div class="container">
+            <h1>Supprimer mon compte</h1>
+            <p>Une fois votre compte supprimé, toutes ses ressources et données seront définitivement supprimées.
+                Avant de supprimer votre compte, veuillez télécharger toutes les données ou informations que vous
+                souhaitez conserver.</p>
+            <a href="{{ path('app_profil_delete', { 'user' : app.user}) }}" class="btn-danger btn-outline-danger">Supprimer mon compte</a>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -71,4 +71,10 @@ class ApiController extends AbstractController
 
         return $this->redirectToRoute('app_user_api');
     }
+
+    #[Route('api/update/{id}', name: 'app_user_api_update')]
+    public function update(Api $api) {
+
+    }
+    
 }
