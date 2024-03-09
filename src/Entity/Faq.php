@@ -19,6 +19,9 @@ class Faq
     #[ORM\Column(length: 0)]
     private ?string $content = null;
 
+    #[ORM\Column]
+    private ?bool $isVisible = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -50,5 +53,17 @@ class Faq
 
     public function __toString() : string {
         return "Faq #" . $this->id;
+    }
+
+    public function isIsVisible(): ?bool
+    {
+        return $this->isVisible;
+    }
+
+    public function setIsVisible(bool $isVisible): static
+    {
+        $this->isVisible = $isVisible;
+
+        return $this;
     }
 }

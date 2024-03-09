@@ -6,6 +6,7 @@ use App\Entity\Faq;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -24,7 +25,8 @@ class FaqCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('title','Titre de la question'),
             TextEditorField::new('content', 'Contenu de réponse')->onlyOnForms(),
-            TextField::new('content', 'Contenu de réponse')->renderAsHtml()->hideOnForm()
+            TextField::new('content', 'Contenu de réponse')->renderAsHtml()->hideOnForm()->hideOnIndex(),
+            BooleanField::new('isVisible', 'Est visible')->renderAsSwitch(false)
         ];
     }
 

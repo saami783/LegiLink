@@ -20,13 +20,20 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.scss) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/app.js')
-    .addEntry('user_app', './assets/js/user/app.js')
 
+    /*
+     * User section
+     */
+    .addEntry('user_app', './assets/js/user/app.js')
     .addStyleEntry('sidenav', './assets/styles/user/sidenav.scss')
 
+    /*
+     *  Guest section
+     */
+    .addEntry('app', './assets/app.js')
     .addStyleEntry('guest', './assets/styles/guest/styles.scss')
-    .addStyleEntry('faq', './assets/styles/guest/faq.scss')
+
+    /******************************************************************************/
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

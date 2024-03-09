@@ -36,6 +36,9 @@ class MessageContact
     #[ORM\Column(length: 255)]
     private ?string $state = null;
 
+    #[ORM\Column]
+    private ?bool $isBug = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +88,18 @@ class MessageContact
     public function setState(string $state): static
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    public function isIsBug(): ?bool
+    {
+        return $this->isBug;
+    }
+
+    public function setIsBug(bool $isBug): static
+    {
+        $this->isBug = $isBug;
 
         return $this;
     }
