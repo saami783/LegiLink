@@ -1,10 +1,7 @@
 <?php
 
 namespace App\Controller\Admin;
-
 use App\Entity\MessageContact;
-use App\Entity\User;
-use App\Enum\MessageState;
 use App\Enum\MessageStateEnum;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
@@ -20,13 +17,15 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
 
-class MessageContactCrudController extends AbstractCrudController
+class MessageBugCrudController extends AbstractCrudController
 {
 
     public function __construct(private EntityManagerInterface $entityManager) { }
+
     public static function getEntityFqcn(): string
     {
         return MessageContact::class;
@@ -57,7 +56,7 @@ class MessageContactCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInPlural('Messages issus du formulaire de Contact');
+            ->setEntityLabelInPlural('Messages issus du formulaire de Bug');
     }
 
 
@@ -76,12 +75,11 @@ class MessageContactCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         return $actions
-                ->add(Crud::PAGE_INDEX, Action::DETAIL)
-                ->disable(Action::DELETE)
-                ->disable(Action::NEW)
+            ->add(Crud::PAGE_INDEX, Action::DETAIL)
+            ->disable(Action::DELETE)
+            ->disable(Action::NEW)
             ;
     }
-
 
     /**
      * @param SearchDto $searchDto
@@ -95,6 +93,7 @@ class MessageContactCrudController extends AbstractCrudController
         return $this->entityManager->createQueryBuilder()
             ->select('entity')
             ->from($entityDto->getFqcn(), 'entity')
-            ->andWhere('entity.isBug = false');
+            ->andWhere('entity.isBug = true');
     }
+
 }
