@@ -4,10 +4,14 @@ namespace App\Mailer;
 
 use Scheb\TwoFactorBundle\Mailer\AuthCodeMailerInterface;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Twig\Environment as TwigEnvironment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * @final
@@ -24,16 +28,23 @@ class AuthCodeMailer implements AuthCodeMailerInterface
         $this->environment = $environment;
     }
 
+    /**
+     * @throws SyntaxError
+     * @throws TransportExceptionInterface
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
     public function sendAuthCode(TwoFactorInterface $user): void
     {
         $authCode = $user->getEmailAuthCode();
-        if (null === $authCode) return;
 
         $message = (new Email())
-            ->from('no-reply@legilinkg.com')
+            ->from('no-reply-legilink@legilink.com')
             ->to($user->getEmailAuthRecipient())
             ->subject("Votre code d'authentification")
-            ->html($this->environment->render('global/security/mails/auth_code.html.twig', ['authCode' => $authCode]));
+            ->html($this->environment->render('mails/auth_code.html.twig', [
+                'authCode' => $authCode,
+            ]));
 
 
         if (null !== $this->senderAddress) {
