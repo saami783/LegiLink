@@ -182,11 +182,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         return $this;
     }
 
-    public function isIsVerified(): ?bool
-    {
-        return $this->isVerified;
-    }
-
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;

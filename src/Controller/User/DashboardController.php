@@ -40,18 +40,23 @@ class DashboardController extends AbstractController
         $form = $this->createForm(FileType::class, $document);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            if($this->formTreatment($user, $entityManager, $document, $setting)) {
-                return $this->redirectToRoute('app_user_media');
-            } else {
-                return $this->redirectToRoute('app_user_dashboard');
+        if(!$user->isVerified()) {
+            $this->addFlash('warning', 'Vous devez vérifier votre adresse email avant de pouvoir upload un fichier.');
+        } else {
+            if ($form->isSubmitted() && $form->isValid()) {
+                if ($this->formTreatment($user, $entityManager, $document, $setting)) {
+                    return $this->redirectToRoute('app_user_media');
+                } else {
+                    return $this->redirectToRoute('app_user_dashboard');
+                }
             }
         }
 
         if($setting->getDailyRequestLimit() - $setting->getTotalRequestSent() >= 1
             && $setting->getDailyRequestLimit() - $setting->getTotalRequestSent() <= 20
             && !$setting->isIsAutoBlockRequests()) {
-            $this->addFlash('warning', "Vous êtes sur le point d'atteindre votre limite quotidienne de requêtes. Pour éviter tout dépassement, envisagez d'activer le blocage automatique des requêtes 🚫");
+            $this->addFlash('warning', "Vous êtes sur le point d'atteindre votre limite quotidienne de requêtes. 
+            Pour éviter tout dépassement, envisagez d'activer le blocage automatique des requêtes 🚫");
         }
 
         $statistics = $this->statisticsService->getStatistics($user, $setting->getDailyRequestLimit());
