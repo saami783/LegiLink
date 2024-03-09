@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Document;
+use App\Entity\Faq;
 use App\Entity\MessageContact;
 use App\Entity\Notification;
 use App\Entity\Setting;
@@ -34,8 +35,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Messages', 'fa-solid fa-comment', MessageContact::class);
         yield MenuItem::linkToCrud('Notifications', 'fa-solid fa-bell', Notification::class);
+        yield MenuItem::linkToCrud('Faq', 'fa-solid fa-question', Faq::class);
 
-        yield MenuItem::subMenu('Gestion', 'fa-solid fa-person-circle-question')
+        yield MenuItem::subMenu('Gestion', 'fa-solid fa-bars')
             ->setSubItems([
                 MenuItem::linkToCrud('Document Utilisateur', 'fa-solid fa-file', Document::class),
         MenuItem::linkToCrud('Paramètre Utilisateur', 'fa-solid fa-gears', Setting::class)
