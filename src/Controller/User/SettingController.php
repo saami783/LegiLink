@@ -44,7 +44,7 @@ class SettingController extends AbstractController
             return $this->redirectToRoute('app_user_setting');
         }
 
-        return $this->render('user/config/index.html.twig', [
+        return $this->render('views/user/config/index.html.twig', [
             'form' => $form->createView(),
         ]);
     }

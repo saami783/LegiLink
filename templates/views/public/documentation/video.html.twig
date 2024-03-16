@@ -1,0 +1,37 @@
+{% extends '/layouts/guest_base.html.twig' %}
+
+{% block title %}Documentation{% endblock %}
+
+{% block body %}
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+                <div style="margin-top: 7rem;"></div>
+                <h1 class="mb-4">Simplifiez votre recherche juridique avec LegiLink</h1>
+                <p>Cette section propose plusieurs vidéos qui vous guident étape par étape sur la configuration d'une clé API, un processus obligatoire pour bénéficier pleinement des fonctionnalités de notre plateforme. Si vous préférez une approche plus traditionnelle, la documentation écrite est disponible en <a href="{{ path('app_documentation') }}">cliquant ici</a>.</p>
+                <div class="video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                    <iframe src="https://www.youtube.com/embed/2Pt9p1CcXiA?si=vHpM7SoKL8DhErLX"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+
+                <div style="margin-top: 7rem;"></div>
+                <h3> Supprimer sa clé API </h3>
+                <div class="video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                    <iframe src="https://www.youtube.com/embed/2Pt9p1CcXiA?si=vHpM7SoKL8DhErLX"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

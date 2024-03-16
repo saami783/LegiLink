@@ -48,7 +48,7 @@ class NotificationController extends AbstractController
             10
         );
 
-        return $this->render('user/notifications/index.html.twig', [
+        return $this->render('views/user/notifications/index.html.twig', [
             'pagination' => $notificationsPaginated
         ]);
     }
@@ -71,7 +71,7 @@ class NotificationController extends AbstractController
         }
          $this->entityManager->close();
 
-        return $this->render('user/notifications/detail.html.twig', [
+        return $this->render('views/user/notifications/detail.html.twig', [
             'notification' => $notification
         ]);
     }

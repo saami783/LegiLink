@@ -55,7 +55,7 @@ class ApiController extends AbstractController
                 return $this->redirectToRoute('app_user_api');
             }
         }
-        return $this->render('user/api/index.html.twig', [
+        return $this->render('views/user/api/index.html.twig', [
             'apis' => $apis,
             'form' => $form->createView(),
         ]);

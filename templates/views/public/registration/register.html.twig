@@ -1,0 +1,67 @@
+{% extends '/layouts/guest_base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+    <div class="container page-content">
+        <div class="row">
+            <div class="col-md-12 col-lg-4 mx-lg-auto">
+
+                {% for flash_error in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                {% endfor %}
+
+                <h2 class="text-lg-center mb-lg-4">Créer votre compte !</h2>
+
+                {{ form_errors(registrationForm) }}
+
+                {{ form_start(registrationForm) }}
+
+                <div class="form-floating">
+                    {{ form_widget(registrationForm.name, {'attr': {'class': 'form-input'}}) }}
+                    {{ form_label(registrationForm.name) }}
+                    {{ form_errors(registrationForm.name) }}
+                </div>
+                <div class="form-floating">
+                    {{ form_widget(registrationForm.surname, {'attr': {'class': 'form-input'}}) }}
+                    {{ form_label(registrationForm.surname) }}
+                    {{ form_errors(registrationForm.surname) }}
+                </div>
+                <div class="form-floating">
+                    {{ form_widget(registrationForm.email, {'attr': {'class': 'form-input'}}) }}
+                    {{ form_label(registrationForm.email) }}
+                    {{ form_errors(registrationForm.email) }}
+                </div>
+                <div class="form-floating">
+                    {{ form_widget(registrationForm.password, {'attr': {'class': 'form-input'}}) }}
+                    {{ form_label(registrationForm.password) }}
+                    {{ form_errors(registrationForm.password) }}
+                </div>
+
+                <div class="d-lg-flex justify-content-lg-between mb-lg-4">
+                    {% for child in registrationForm.profession %}
+                        <div>
+                            {{ form_widget(child) }}
+                            {{ form_label(child) }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {{ form_row(registrationForm.agreeTerms) }}
+
+                <div class="row mt-lg-4 mb-lg-3">
+                    <div class="col-lg-8 mx-lg-auto">
+                        {{ form_row(registrationForm.save) }}
+                    </div>
+                </div>
+
+                {{ form_end(registrationForm) }}
+
+                <p class="text-lg-center">Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Connectez-vous</a></p>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

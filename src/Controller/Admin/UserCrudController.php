@@ -35,7 +35,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('name', 'Nom'),
             TextField::new('email'),
             TextField::new('profession')->hideOnForm(),
-            ArrayField::new('roles', 'Rôles')->hideOnForm(),
+            ArrayField::new('views', 'Rôles')->hideOnForm(),
 
             ChoiceField::new('profession', 'Profession')
                 ->setChoices(ProfessionEnum::getValues())
@@ -48,7 +48,7 @@ class UserCrudController extends AbstractCrudController
                         return $choice;
                     },
                 ])->onlyOnForms(),
-            ChoiceField::new('roles', 'Rôles')
+            ChoiceField::new('views', 'Rôles')
                 ->setChoices(UserRoleEnum::getValues())
                 ->setRequired(true)
                 ->onlyOnForms()

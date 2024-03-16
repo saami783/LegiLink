@@ -1,0 +1,16 @@
+{% extends '/layouts/user_base.html.twig' %}
+
+{% block title %}Paramètres{% endblock %}
+
+{% block body %}
+
+    {% include '/partials/flashes.html.twig' %}
+
+    <div class="example-wrapper">
+        {{ form_start(form, {'attr': {'id': 'settings-form'}}) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary" type="submit">Mettre à jour</button>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

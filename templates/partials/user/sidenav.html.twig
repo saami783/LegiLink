@@ -1,0 +1,144 @@
+{% block stylesheets %}
+    {{ encore_entry_link_tags('user_app') }}
+    {{ encore_entry_link_tags('sidenav') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('user_app') }}
+{% endblock %}
+
+<nav
+        id="sidenav-4"
+        class="custom-nav-size group fixed left-0 top-0 z-[1035] overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] flex flex-col"
+        data-te-sidenav-init
+        data-te-sidenav-hidden="false"
+        data-te-sidenav-mode="side"
+        data-te-sidenav-slim="true"
+        data-te-sidenav-content="#slim-content"
+        data-te-sidenav-slim-collapsed="true"
+>
+
+    <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
+
+        <li class="relative">
+            <a      href="{{ path('app_user_dashboard') }}"
+                    class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                    data-te-sidenav-link-ref>
+                <img src="{{ asset('build/sidebar_icons/unselected/home.png') }}" alt="Dashboard" class="icon-fixed-size"/>
+                <span
+                        class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
+                        data-te-sidenav-slim="false"
+                >Dashboard</span
+                >
+            </a>
+        </li>
+
+        <li class="relative">
+            <a
+                    href="{{ path('app_user_media') }}"
+                    class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                    data-te-sidenav-link-ref>
+                <img src="{{ asset('build/sidebar_icons/unselected/media.png') }}" alt="Home" class="icon-fixed-size h-4 w-4"/>
+                <span
+                        class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
+                        data-te-sidenav-slim="false"
+                >Media</span
+                >
+            </a>
+        </li>
+
+        <li class="relative">
+            <a
+                    href="{{ path('app_profil') }}"
+                    class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                    data-te-sidenav-link-ref>
+                <img src="{{ asset('build/sidebar_icons/unselected/profil.png') }}" alt="Home" class="icon-fixed-size h-4 w-4"/>
+                <span
+                        class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
+                        data-te-sidenav-slim="false"
+                >Mon profil</span
+                >
+            </a>
+        </li>
+
+        <li class="relative">
+            <a
+                    href="{{ path('app_user_notification') }}"
+                    class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                    data-te-sidenav-link-ref>
+                <img src="{{ asset('build/sidebar_icons/unselected/notification.png') }}" alt="Home" class="icon-fixed-size h-4 w-4"/>
+                <span
+                        class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
+                        data-te-sidenav-slim="false"
+                >Notifications</span
+                >
+            </a>
+        </li>
+
+        <li class="relative">
+            <a
+                    href="{{ path('app_user_setting') }}"
+                    class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                    data-te-sidenav-link-ref>
+                <img src="{{ asset('build/sidebar_icons/unselected/outils.png') }}" alt="Home" class="icon-fixed-size h-4 w-4"/>
+                <span
+                        class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
+                        data-te-sidenav-slim="false"
+                >Outils</span
+                >
+            </a>
+        </li>
+
+        <li class="relative">
+            <a
+                    href="{{ path('app_user_api') }}"
+                    class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
+                    data-te-sidenav-link-ref>
+                <img src="{{ asset('build/sidebar_icons/unselected/parametres.png') }}" alt="Home" class="icon-fixed-size h-4 w-4"/>
+                <span
+                        class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
+                        data-te-sidenav-slim="false"
+                >Paramètres API</span
+                >
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="mt-auto w-full">
+        <ul class="list-none p-0 m-0">
+            <li class="relative">
+                <a
+                        style="background-color: #667A8A;"
+                        href="{{ path('app_logout') }}"
+                        class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-white outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit focus:bg-slate-50 focus:text-inherit active:bg-slate-50 active:text-inherit data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none"
+                        data-te-sidenav-link-ref>
+                    <img src="{{ asset('build/sidebar_icons/logout.png') }}" alt="Déconnexion" class="icon-fixed-size h-4 w-4"/>
+                    <span
+                            class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
+                            data-te-sidenav-slim="false"
+                    >Déconnexion</span
+                    >
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+<!-- Sidenav -->
+
+<div id="slim-content" class="flex !pl-[77px]">
+    <!-- Toggler -->
+    <button
+            class="mt-10 inline-block rounded bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+            aria-haspopup="true"
+            id="slim-toggler">
+       LegiLink
+    </button>
+</div>
+
+<div id="main-content" style="margin-left: 292px;">
+    {% block body %}
+
+    {% endblock %}
+</div>
