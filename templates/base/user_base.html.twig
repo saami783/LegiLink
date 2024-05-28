@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="FR">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('user_app') }}
+        {{ encore_entry_link_tags('sidenav') }}
+    {% endblock %}
+</head>
+<body>
+{% include '/partials/user/header.html.twig' %}
+{% include '/partials/user/sidenav.html.twig' %}
+
+<div id="main-content">
+    {% block body %}{% endblock %}
+</div>
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('user_app') }}
+{% endblock %}
+</body>
+</html>

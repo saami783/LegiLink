@@ -1,0 +1,117 @@
+{% extends '/base/guest_base.html.twig' %}
+
+{% block title %}Documentation{% endblock %}
+
+{% block body %}
+
+    <style>
+        .accordion-container{
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .scrollspy-example-2 {
+            position: relative;
+            overflow-y: scroll;
+            height: 650px;
+        }
+
+        .space-custom {
+            margin-top: 2rem;
+        }
+
+    </style>
+
+    <div style="margin-top: 7rem;"></div>
+
+    <div class="accordion-container">
+        <div class="row">
+            <div class="col-4">
+                <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
+                    <nav class="nav nav-pills flex-column">
+                        <a class="nav-link" href="#item-1">Démarrer</a>
+                        <nav class="nav nav-pills flex-column">
+                            <a class="nav-link ms-3 my-1" href="#item-1-1">Configurer sa clé API Google</a>
+                            <a class="nav-link ms-3 my-1" href="#item-1-2">Activer l'Api Custom Search</a>
+                        </nav>
+                        <a class="nav-link" href="#item-2">Créer ses identifiants</a>
+                        <a class="nav-link" href="#item-3">Item 3</a>
+                        <nav class="nav nav-pills flex-column">
+                            <a class="nav-link ms-3 my-1" href="#item-3-1">Item 3-1</a>
+                            <a class="nav-link ms-3 my-1" href="#item-3-2">Item 3-2</a>
+                        </nav>
+                    </nav>
+                </nav>
+            </div>
+
+            <div class="col-8">
+                <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+                    <div id="Configurer sa clé API Google">
+                        <h4>Configurer sa clé API Google</h4>
+                        <p> Pré-requis : </p>
+                        <ul>
+                            <li>Un compte google</li>
+                        </ul>
+                    </div>
+                    <div id="item-1-1">
+                        <h5>Créer un projet Google</h5>
+                        <p>Pour créer un projet Google il faut dans un premier temps cliquer sur le lien suivant <a href="https://console.cloud.google.com/projectselector2/apis/library/customsearch.googleapis.com" target="_blank"> Google API. </a> Puis cliquez sur Cliquez sur "Nouveau projet".</p>
+                        <img src="{{ asset('build/documentation/first_google_api_page.png') }}" alt="First google api project" height="300px" width="800px"/>
+
+                        <p>Il vous faudra ensuite remplir les champs du formulaire liée à la création du projet. Pour la "Zone", séléctionnez "Aucune organisation".</p>
+                        <img src="{{ asset('build/documentation/create_project.png') }}" alt="Screen création d'un projet" height="300px" width="800px"/>
+                    </div>
+
+                    <div class="space-custom"></div>
+
+                    <div id="item-1-2">
+                        <h5>Activer l'Api Custom Search</h5>
+                        <img src="{{ asset('build/documentation/activer_api.png') }}" alt="Screen activer api" height="300px" width="800px"/>
+                    </div>
+
+                    <div class="space-custom"></div>
+
+                    <div id="item-2">
+                        <h4>Créer ses identifiants</h4>
+                        <img src="{{ asset('build/documentation/creer_credentatials.7314c2c3.png') }}" alt="Screen creer credentials" height="300px" width="800px" />
+
+                        <div class="space-custom"></div>
+
+                        <img src="{{ asset('build/documentation/type_credentials.png') }}" alt="Screen type credentials" height="300px" width="800px" />
+
+                        <div class="space-custom"></div>
+
+                        <img src="{{ asset('build/documentation/info_application.png') }}" alt="Screen info application" height="300px" width="300px" />
+
+                        <div class="space-custom"></div>
+
+                        <img src="{{ asset('build/documentation/client_oauth.png') }}" alt="Screen client oauth" height="300px" width="300px" />
+                    </div>
+                    <div id="item-3">
+                        <h4>Item 3</h4>
+                        <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.
+
+                            Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.
+
+                        </p>
+                    </div>
+                    <div id="item-3-1">
+                        <h5>Item 3-1</h5>
+                        <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.
+
+                            Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.</p>
+                    </div>
+                    <div id="item-3-2">
+                        <h5>Item 3-2</h5>
+                        <p>This is some placeholder content for the scrollspy page. Note that as you scroll down the page, the appropriate navigation link is highlighted. It's repeated throughout the component example. We keep adding some more example copy here to emphasize the scrolling and highlighting.
+
+                            Keep in mind that the JavaScript plugin tries to pick the right element among all that may be visible. Multiple visible scrollspy targets at the same time may cause some issues.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 8rem;"></div>
+
+{% endblock %}

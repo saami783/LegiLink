@@ -15,7 +15,7 @@ class FaqController extends AbstractController
     public function index(): Response
     {
 
-        return $this->render('views/public/faq/index.html.twig', [
+        return $this->render('/public/faq/index.html.twig', [
             'questions' => $this->faqRepository->findBy(['isVisible' => true]),
         ]);
     }

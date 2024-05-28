@@ -61,7 +61,7 @@ class DashboardController extends AbstractController
 
         $statistics = $this->statisticsService->getStatistics($user, $setting->getDailyRequestLimit());
 
-        return $this->render('views/user/dashboard/index.html.twig', [
+        return $this->render('/user/dashboard/index.html.twig', [
             'form' => $form->createView(),
             'statistics' => $statistics
             ]);

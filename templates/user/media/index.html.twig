@@ -1,0 +1,14 @@
+{% extends '/base/user_base.html.twig' %}
+
+{% block title %}Medias{% endblock %}
+
+{% block body %}
+    {% include '/partials/flashes.html.twig' %}
+
+        {% if documentId %}
+            <a href="{{ path('app_user_download', {'id': documentId}) }}">Télécharger le document</a>
+        {% else %}
+            <p>Aucun document à télécharger.</p>
+        {% endif %}
+
+{% endblock %}

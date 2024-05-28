@@ -30,7 +30,7 @@ class MediaController extends AbstractController
 
         $this->entityManager->close();
 
-        return $this->render('views/user/media/index.html.twig', [
+        return $this->render('/user/media/index.html.twig', [
             'documentId' => $document ? $document->getId() : null,
         ]);
     }

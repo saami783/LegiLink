@@ -30,6 +30,6 @@ class BugController extends AbstractController
                return $this->redirectToRoute('app_bug');
            }
         }
-        return $this->render('views/public/bug/index.html.twig', ['form' => $form->createView()]);
+        return $this->render('/public/bug/index.html.twig', ['form' => $form->createView()]);
     }
 }

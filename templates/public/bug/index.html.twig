@@ -1,0 +1,35 @@
+{% extends 'base/guest_base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+
+    <div class="container page-content">
+        <div class="row">
+            <div class="col-md-12 col-lg-4 mx-lg-auto text-lg-center">
+
+                <h1 class="mb-lg-5">Vous avez rencontré un bug ? <br>
+                    Signalez-le nous !
+                </h1>
+
+                {% include '/partials/flashes.html.twig' %}
+
+                {{ form_start(form) }}
+
+                <div id="email">
+                    {{ form_row(form.email, {'attr': {'placeholder': 'Adresse E-mail', 'class': 'form-control'}}) }}
+                </div>
+                <div>
+                    {{ form_row(form.message, {'attr': {'placeholder': 'Votre message ici...', 'class': 'form-control', 'rows': '5'}}) }}
+                </div>
+                <div>
+                    {{ form_row(form.save, {'attr': {'class': 'btn btn-secondary', 'style': 'width:100%;'}}) }}
+                </div>
+
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
