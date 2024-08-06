@@ -2,9 +2,10 @@
 
 namespace App\Service;
 
-use App\Enum\MessageStateEnum;
 use App\Entity\MessageContact;
+use App\Enum\MessageStateEnum;
 use Doctrine\ORM\EntityManagerInterface;
+
 class MessageService
 {
 

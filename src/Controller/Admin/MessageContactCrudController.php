@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\MessageContact;
-use App\Entity\User;
 use App\Enum\MessageState;
 use App\Enum\MessageStateEnum;
 use Doctrine\ORM\EntityManagerInterface;

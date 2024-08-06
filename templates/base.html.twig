@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('styles/app.tailwind.css') }}">
+        {% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+    {% include '/partials/public/header.html.twig' %}
+
+    {% block body %} {% endblock %}
+
+    {% include '/partials/public/footer.html.twig' %}
+    </body>
+</html>

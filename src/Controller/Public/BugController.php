@@ -5,8 +5,8 @@ namespace App\Controller\Public;
 use App\Entity\MessageContact;
 use App\Form\MessageContactType;
 use App\Service\MessageService;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 

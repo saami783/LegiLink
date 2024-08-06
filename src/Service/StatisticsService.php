@@ -4,10 +4,8 @@
 
 namespace App\Service;
 
-use App\Entity\ApiExecution;
 use App\Entity\User;
 use App\Repository\ApiExecutionRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 

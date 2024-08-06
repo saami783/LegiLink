@@ -3,10 +3,8 @@
 namespace App\Controller\Public;
 
 use App\Entity\MessageContact;
-use App\Enum\MessageStateEnum;
 use App\Form\MessageContactType;
 use App\Service\MessageService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -1,8 +1,38 @@
-{% extends '/layouts/guest_base.html.twig' %}
+{% extends '/base.html.twig' %}
 
 {% block title %}Home{% endblock %}
 
 {% block body %}
+
+    <style>
+        #image-container {
+            position: absolute;
+            right: 0;
+        }
+
+        .image-container {
+            @media screen and (max-width: 768px) {
+                display: none;
+            }
+        }
+
+        #computer{
+            position: relative;
+            width: 500px;
+            height: auto;
+            transform: translateY(-95%);
+        }
+
+        #background{
+            position: absolute;
+            z-index: -1;
+            width: 800px;
+            height: auto;
+            transform: translateY(-90%);
+            top: 30px;
+            right: 0;
+        }
+    </style>
 
     <div class="container mt-5">
         <div class="row">
@@ -26,8 +56,8 @@
     </div>
 
     <div id="image-container" class="image-container">
-        <img id="computer" src="{{ asset('build/home/computer_hp.png') }}" alt="Computer">
-        <img id="background" src="{{ asset('build/home/background_hp.png') }}" alt="Background">
+        <img id="computer" src="{{ asset('images/home/computer_hp.png') }}" alt="Computer">
+        <img id="background" src="{{ asset('images/home/background_hp.png') }}" alt="Background">
     </div>
 
     <div class="row key-figures-container text-center justify-content-lg-center">
@@ -59,7 +89,7 @@
                         économiser des heures de recherche.</p>
 
                     <div class="col-lg-1 mb-lg-2 image-container">
-                        <img id="downloadIcon" src="{{ asset('build/home/download_icon.png') }}" alt="Download icon">
+                        <img id="downloadIcon" src="{{ asset('images/home/download_icon.png') }}" alt="Download icon">
                     </div>
 
                     <div class="row">
@@ -80,7 +110,7 @@
 
         <div class="row">
             <div class="col-lg-6">
-                <img id="woman" src="{{ asset('build/home/woman_oncomputer.jpg') }}" alt="Woman on computer illustration">
+                <img id="woman" src="{{ asset('images/home/woman_oncomputer.jpg') }}" alt="Woman on computer illustration">
             </div>
             <div class="col-lg-5">
                 <h2 class="mt-5">Intuitif, rapide et puissant</h2>

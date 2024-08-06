@@ -8,13 +8,13 @@ use App\Entity\Setting;
 use App\Entity\User;
 use App\Form\FileType;
 use App\Service\StatisticsService;
+use App\Service\UpdateFileService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\UpdateFileService;
 
 class DashboardController extends AbstractController
 {
