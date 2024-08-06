@@ -16,7 +16,7 @@ class FaqController extends AbstractController
     {
 
         return $this->render('views/public/faq/index.html.twig', [
-            'questions' => $this->faqRepository->findBy(['isVisible' => true]),
+            'faqs' => $this->faqRepository->findBy(['isVisible' => true]),
         ]);
     }
 }

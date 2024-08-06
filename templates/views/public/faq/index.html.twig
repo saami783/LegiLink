@@ -1,38 +1,40 @@
-{% extends '/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Faq{% endblock %}
 
 {% block body %}
 
-    <style>
-        .accordion-container{
-            max-width: 900px;
-            margin: auto;
-        }
-    </style>
-    <div style="margin-top: 7rem;"></div>
+    <div class="max-w-screen-xl mx-auto px-5 bg-white min-h-sceen">
+        <div class="flex flex-col items-center">
+            <h2 class="font-bold text-5xl mt-5 tracking-tight">
+                FAQ
+            </h2>
+            <p class="text-neutral-500 text-xl mt-3">
+                Questions fréquemment posées
+            </p>
+        </div>
+        <div class="grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8">
 
-    <div class="accordion-container">
-
-        <h1 class="mb-lg-5">Questions fréquemment posées</h1>
-
-        <div class="accordion" id="accordionExample">
-            {% for question in questions %}
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading{{ loop.index }}">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
-                            {{ question.title }}
-                        </button>
-                    </h2>
-                    <div id="collapse{{ loop.index }}" class="accordion-collapse collapse {% if loop.first %} show {% endif %}" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            {{ question.content | raw }}
-                        </div>
-                    </div>
+            {% for faq in faqs %}
+                <div class="py-5">
+                    <details class="group">
+                        <summary class="flex justify-between items-center font-medium cursor-pointer list-none">
+                            <span> {{ faq.question }} </span>
+                            <span class="transition group-open:rotate-180">
+                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor"
+                         stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path
+                                d="M6 9l6 6 6-6"></path>
+                    </svg>
+                  </span>
+                        </summary>
+                        <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                            {{ faq.answer | raw }}
+                        </p>
+                    </details>
                 </div>
             {% endfor %}
+
         </div>
     </div>
-    <div style="margin-top: 16rem;"></div>
 
 {% endblock %}

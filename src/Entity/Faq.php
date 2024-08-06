@@ -14,10 +14,10 @@ class Faq
     private ?int $id = null;
 
     #[ORM\Column(length: 0)]
-    private ?string $title = null;
+    private ?string $question = null;
 
     #[ORM\Column(length: 0)]
-    private ?string $content = null;
+    private ?string $answer = null;
 
     #[ORM\Column]
     private ?bool $isVisible = null;
@@ -27,26 +27,26 @@ class Faq
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getQuestion(): ?string
     {
-        return $this->title;
+        return $this->question;
     }
 
-    public function setTitle(string $title): static
+    public function setQuestion(string $question): static
     {
-        $this->title = $title;
+        $this->question = $question;
 
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getAnswer(): ?string
     {
-        return $this->content;
+        return $this->answer;
     }
 
-    public function setContent(string $content): static
+    public function setAnswer(string $answer): static
     {
-        $this->content = $content;
+        $this->answer = $answer;
 
         return $this;
     }
