@@ -1,16 +1,11 @@
 {
-  "name": "clear",
-  "version": "1.0.0",
-  "description": "LegiLink - Combinaison des mots \"Législation\" et \"Link\" (lien en anglais), ce nom est direct et facile à retenir. Il évoque clairement l'objectif de relier les utilisateurs aux textes de loi pertinents.",
-  "main": "tailwind.config.js",
-  "directories": {
-    "test": "tests"
-  },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": ".\\bin\\tailwind\\windows\\tailwindcss.exe -i .\\assets\\styles\\app.css -o .\\assets\\styles\\app.tailwind.css -m"
   },
-  "author": "",
-  "license": "ISC"
+  "devDependencies": {
+    "flowbite-typography": "^1.0.3"
+  },
+  "dependencies": {
+    "flowbite": "^2.4.1"
+  }
 }

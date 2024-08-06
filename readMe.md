@@ -25,11 +25,22 @@ Quelques sites de composants tailwinds : <br>
 
 - npm i @symfony/stimulus-bundle
 - php bin/console importmap:require @symfony/stimulus-bundle
-- symfony console importmap:require bootstrap/dist/css/bootstrap.min.css 
-- php bin/console importmap:require tailwindcss/forms
 
 
-- symfony console importmap:require jquery
+- symfony console importmap:require bootstrap/dist/css/bootstrap.min.css --download
+- php bin/console importmap:require tailwindcss/forms --download
+- symfony console importmap:require jquery --download
 - php bin/console importmap:update
 - .\bin\tailwindcss.exe init
-- php bin/console importmap:require bootstrap
+- php bin/console importmap:require bootstrap --download
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
