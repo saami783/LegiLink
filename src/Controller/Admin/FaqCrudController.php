@@ -89,13 +89,13 @@ class FaqCrudController extends AbstractCrudController
 
         if($faq->isIsVisible()) {
             $faq->setIsVisible(false);
+            $this->addFlash('success', 'La FAQ a été désactivée avec succès.');
         } else {
             $faq->setIsVisible(true);
+            $this->addFlash('success', 'La FAQ a été activée avec succès.');
         }
 
         $entityManager->persist($faq); $entityManager->flush();
-
-        $this->addFlash('success', 'La FAQ a été désactivée avec succès.');
 
         $url = $adminUrlGenerator
             ->setController(self::class)
