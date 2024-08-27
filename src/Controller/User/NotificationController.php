@@ -24,7 +24,7 @@ class NotificationController extends AbstractController
 
     }
 
-    #[Route('/notifications/count', name: 'notifications_count')]
+    #[Route('/dashboard/notifications/count', name: 'notifications_count')]
     public function count(): Response
     {
         /** @var User $user */
@@ -34,7 +34,7 @@ class NotificationController extends AbstractController
         return new Response($count);
     }
 
-    #[Route('/notifications', name: 'app_user_notification')]
+    #[Route('/dashboard/notifications', name: 'app_user_notification')]
     public function index(Request $request, NotificationUserRepository $notificationUserRepository, PaginatorInterface $paginator): Response
     {
         /** @var User $user */
@@ -55,7 +55,7 @@ class NotificationController extends AbstractController
 
 
 
-    #[Route('/notifications/{notification}', name: 'app_user_detail_notification')]
+    #[Route('/dashboard/notifications/{notification}', name: 'app_user_detail_notification')]
     public function detail(Notification $notification, NotificationUserRepository $notificationUserRepository): Response {
         $this->denyAccessUnlessGranted('NOTIFICATION_VIEW', $notification);
 

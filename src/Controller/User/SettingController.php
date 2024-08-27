@@ -15,7 +15,7 @@ class SettingController extends AbstractController
 {
     public function __construct(private EntityManagerInterface $entityManager) {}
 
-    #[Route('/config', name: 'app_user_setting')]
+    #[Route('/dashboard/config', name: 'app_user_setting')]
     public function index(Request $request): Response
     {
         /** @var User $user */

@@ -22,7 +22,7 @@ class ProfilController extends AbstractController
 
     public function __construct(private UserRepository $userRepository, private EntityManagerInterface $entityManager) { }
 
-    #[Route('/profil', name: 'app_profil')]
+    #[Route('/dashboard/profil', name: 'app_profil')]
     public function index(Request $request, UserRepository $userRepository): Response
     {
 
@@ -62,7 +62,7 @@ class ProfilController extends AbstractController
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    #[Route('/delete', name: 'app_profil_delete')]
+    #[Route('/dashboard/delete', name: 'app_profil_delete')]
     public function delete( SessionInterface $session,
                             TokenStorageInterface $tokenStorage) : Response {
 

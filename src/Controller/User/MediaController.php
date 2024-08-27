@@ -4,7 +4,7 @@ namespace App\Controller\User;
 
 use App\Entity\Document;
 use App\Security\Voter\DocumentVoter;
-use App\Service\FileDownloadHandler;
+use App\Service\FileDownloadHandlerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +17,7 @@ class MediaController extends AbstractController
     public function __construct(private EntityManagerInterface $entityManager) {
 
     }
-    #[Route('/media', name: 'app_user_media')]
+    #[Route('/dashboard/media', name: 'app_user_media')]
     public function index(): Response
     {
         $document = $this->entityManager->getRepository(Document::class)->findOneBy([
@@ -32,8 +32,8 @@ class MediaController extends AbstractController
         ]);
     }
 
-    #[Route('/download/{id}', name: 'app_user_download')]
-    public function download(FileDownloadHandler $downloadHandler, Document $document): Response
+    #[Route('/dashboard/download/{id}', name: 'app_user_download')]
+    public function download(FileDownloadHandlerService $downloadHandler, Document $document): Response
     {
 
         $this->denyAccessUnlessGranted(DocumentVoter::DOWNLOAD, $document);

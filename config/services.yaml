@@ -20,7 +20,7 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-    App\Service\FileDownloadHandler:
+    App\Service\FileDownloadHandlerService:
         arguments:
             $projectDir: '%kernel.project_dir%'
     # add more service definitions when explicit configuration is needed

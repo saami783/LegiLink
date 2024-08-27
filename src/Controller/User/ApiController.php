@@ -16,7 +16,7 @@ class ApiController extends AbstractController
 
     public function __construct(private EntityManagerInterface $entityManager) {}
 
-    #[Route('/config/api', name: 'app_user_api')]
+    #[Route('/dashboard/config/api', name: 'app_user_api')]
     public function index(Request $request): Response
     {
         $user = $this->getUser();
@@ -61,7 +61,7 @@ class ApiController extends AbstractController
         ]);
     }
 
-    #[Route('api/update/{id}', name: 'app_user_api_update')]
+    #[Route('/dashboard/api/update/{id}', name: 'app_user_api_update')]
     public function update(Api $api) : Response {
         $this->denyAccessUnlessGranted(ApiVoter::EDIT, $api);
 
@@ -77,7 +77,7 @@ class ApiController extends AbstractController
         return $this->redirectToRoute('app_user_api');
     }
 
-    #[Route('/api/delete/{id}', name: 'app_user_api_delete')]
+    #[Route('/dashboard/api/delete/{id}', name: 'app_user_api_delete')]
     public function delete(Api $api): Response
     {
         $this->denyAccessUnlessGranted(ApiVoter::DELETE, $api);

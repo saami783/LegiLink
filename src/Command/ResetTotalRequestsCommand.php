@@ -12,7 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'app:reset-total-requests',
-    description: 'Add a short description for your command',
+    description: 'Réinitialise le compteur de requêtes effectuer toutes les 24h',
 )]
 class ResetTotalRequestsCommand extends Command
 {

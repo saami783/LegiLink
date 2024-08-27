@@ -3,65 +3,71 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Créez votre compte !</h2>
+        </div>
 
-    <div class="container page-content">
-        <div class="row">
-            <div class="col-md-12 col-lg-4 mx-lg-auto">
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            {% for flash_error in app.flashes('verify_email_error') %}
+                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+            {% endfor %}
 
-                {% for flash_error in app.flashes('verify_email_error') %}
-                    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-                {% endfor %}
+            {{ form_start(registrationForm, {'attr': {'class': 'space-y-6'}}) }}
 
-                <h2 class="text-lg-center mb-lg-4">Créer votre compte !</h2>
-
-                {{ form_errors(registrationForm) }}
-
-                {{ form_start(registrationForm) }}
-
-                <div class="form-floating">
-                    {{ form_widget(registrationForm.name, {'attr': {'class': 'form-input'}}) }}
-                    {{ form_label(registrationForm.name) }}
-                    {{ form_errors(registrationForm.name) }}
+            <div>
+                {{ form_label(registrationForm.name, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-900'}}) }}
+                <div class="mt-2">
+                    {{ form_widget(registrationForm.name, {'attr': {'class': 'block w-full rounded-md border-gray-300 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-indigo-600 sm:text-sm'}}) }}
                 </div>
-                <div class="form-floating">
-                    {{ form_widget(registrationForm.surname, {'attr': {'class': 'form-input'}}) }}
-                    {{ form_label(registrationForm.surname) }}
-                    {{ form_errors(registrationForm.surname) }}
+                {{ form_errors(registrationForm.name) }}
+            </div>
+
+            <div>
+                {{ form_label(registrationForm.surname, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-900'}}) }}
+                <div class="mt-2">
+                    {{ form_widget(registrationForm.surname, {'attr': {'class': 'block w-full rounded-md border-gray-300 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-indigo-600 sm:text-sm'}}) }}
                 </div>
-                <div class="form-floating">
-                    {{ form_widget(registrationForm.email, {'attr': {'class': 'form-input'}}) }}
-                    {{ form_label(registrationForm.email) }}
-                    {{ form_errors(registrationForm.email) }}
+                {{ form_errors(registrationForm.surname) }}
+            </div>
+
+            <div>
+                {{ form_label(registrationForm.email, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-900'}}) }}
+                <div class="mt-2">
+                    {{ form_widget(registrationForm.email, {'attr': {'class': 'block w-full rounded-md border-gray-300 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-indigo-600 sm:text-sm'}}) }}
                 </div>
-                <div class="form-floating">
-                    {{ form_widget(registrationForm.password, {'attr': {'class': 'form-input'}}) }}
-                    {{ form_label(registrationForm.password) }}
-                    {{ form_errors(registrationForm.password) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+
+            <div>
+                {{ form_label(registrationForm.password, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-900'}}) }}
+                <div class="mt-2">
+                    {{ form_widget(registrationForm.password, {'attr': {'class': 'block w-full rounded-md border-gray-300 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset focus:ring-2 focus:ring-indigo-600 sm:text-sm'}}) }}
                 </div>
+                {{ form_errors(registrationForm.password) }}
+            </div>
 
-                <div class="d-lg-flex justify-content-lg-between mb-lg-4">
-                    {% for child in registrationForm.profession %}
-                        <div>
-                            {{ form_widget(child) }}
-                            {{ form_label(child) }}
-                        </div>
-                    {% endfor %}
+            <div class="mt-4">
+                {{ form_label(registrationForm.profession, 'Profession', {'label_attr': {'class': 'block text-sm font-medium text-gray-900'}}) }}
+                <div class="mt-2 space-y-4">
+                    {{ form_widget(registrationForm.profession, {'expanded': true, 'attr': {'class': 'form-radio'}}) }}
                 </div>
+                {{ form_errors(registrationForm.profession) }}
+            </div>
 
-                {{ form_row(registrationForm.agreeTerms) }}
+            <div class="mt-6">
+                {{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'flex items-center'}}) }}
+            </div>
 
-                <div class="row mt-lg-4 mb-lg-3">
-                    <div class="col-lg-8 mx-lg-auto">
-                        {{ form_row(registrationForm.save) }}
-                    </div>
-                </div>
+            <div>
+                {{ form_widget(registrationForm.save, {'attr': {'class': 'w-full flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline focus:ring-2 focus:ring-indigo-600'}}) }}
+            </div>
 
-                {{ form_end(registrationForm) }}
+            {{ form_end(registrationForm) }}
 
-                <p class="text-lg-center">Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Connectez-vous</a></p>
-
+            <div class="text-center mt-4">
+                <p>Vous avez déjà un compte ? <a href="{{ path('app_login') }}" class="text-indigo-600 hover:text-indigo-500 font-semibold">Connectez-vous</a></p>
             </div>
         </div>
     </div>
-
 {% endblock %}
