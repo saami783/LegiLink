@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\User\Api;
 
+use App\Entity\User;
+use App\Repository\ApiRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,21 +11,25 @@ use Symfony\Component\Routing\Annotation\Route;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
-class TestController extends AbstractController
+class PythonApiController extends AbstractController
 {
-    #[Route('/test', name: 'app_test')]
-    public function index(Request $request)
+    #[Route('/get-articles', name: 'app_python_api')]
+    public function index(Request $request, ApiRepository $repository)
     {
         $client = new Client();
 
-        // Préparer les données à envoyer au script Python
+        /** @var User $user */
+        $user = $this->getUser();
+        $api = $repository->findOneBy(['user' => $user, 'isDefault' => true]);
+
+        // Prépare les données à envoyer à l'api Python
         $dataToSend = [
-            'legifrance_api_key' => '1559207d-b427-4364-a53a-e74f3fb605eb',
-            'legifrance_api_secret' => '73b502c0-172e-448e-a5ae-d7b6333d2ff7',
+            'legifrance_api_key' => $api->getApiKey(),
+            'legifrance_api_secret' => $api->getApiSecret(),
             'code_name' => 'Code civil',      // Exemple de valeur
             'search' => '7',                  // Exemple de valeur
-            'champ' => 'ARTICLE',             // Optionnel
-            'formatter' => true               // Optionnel
+//            'champ' => 'ARTICLE',             // Optionnel
+//            'formatter' => true               // Optionnel
         ];
 
         try {
@@ -31,7 +37,7 @@ class TestController extends AbstractController
                 'json' => $dataToSend
             ]);
 
-            // Vérifier le code de statut HTTP
+            // Vérifie le code de statut HTTP
             $statusCode = $response->getStatusCode();
             if ($statusCode !== 200) {
                 return new JsonResponse(['error' => 'Erreur côté serveur Python', 'status' => $statusCode], $statusCode);
@@ -39,12 +45,12 @@ class TestController extends AbstractController
 
             $result = json_decode($response->getBody()->getContents(), true);
 
-            // Vérifier si le JSON est valide
+            // Vérifie si le JSON est valide
             if (json_last_error() !== JSON_ERROR_NONE) {
                 return new JsonResponse(['error' => 'Erreur de décodage JSON'], 500);
             }
 
-            // Utiliser $result selon tes besoins
+            // Utilise $result
             return new JsonResponse($result);
 
         } catch (RequestException $e) {
@@ -52,4 +58,5 @@ class TestController extends AbstractController
             return new JsonResponse(['error' => $e->getMessage()], $e->getCode() ?: 500);
         }
     }
+
 }

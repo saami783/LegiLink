@@ -1,142 +1,58 @@
-{% block stylesheets %}
-    {{ encore_entry_link_tags('user_app') }}
-    {{ encore_entry_link_tags('sidenav') }}
-{% endblock %}
-
-{% block javascripts %}
-    {{ encore_entry_script_tags('user_app') }}
-{% endblock %}
-
-<nav
-        id="sidenav-4"
-        class="custom-nav-size group fixed left-0 top-0 z-[1035] overflow-hidden bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.07),_0_2px_4px_rgba(0,0,0,0.05)] flex flex-col"
-        data-te-sidenav-init
-        data-te-sidenav-hidden="false"
-        data-te-sidenav-mode="side"
-        data-te-sidenav-slim="true"
-        data-te-sidenav-content="#slim-content"
-        data-te-sidenav-slim-collapsed="true"
->
-
-    <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
-
-        <li class="relative">
-            <a      href="{{ path('app_user_dashboard') }}"
-                    class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                    data-te-sidenav-link-ref>
-                <img src="{{ asset('build/sidebar_icons/unselected/home.png') }}" alt="Dashboard" class="icon-fixed-size"/>
-                <span
-                        class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
-                        data-te-sidenav-slim="false"
-                >Dashboard</span
-                >
-            </a>
-        </li>
-
-        <li class="relative">
-            <a
-                    href="{{ path('app_user_media') }}"
-                    class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                    data-te-sidenav-link-ref>
-                <img src="{{ asset('build/sidebar_icons/unselected/media.png') }}" alt="Home" class="icon-fixed-size h-4 w-4"/>
-                <span
-                        class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
-                        data-te-sidenav-slim="false"
-                >Media</span
-                >
-            </a>
-        </li>
-
-        <li class="relative">
-            <a
-                    href="{{ path('app_profil') }}"
-                    class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                    data-te-sidenav-link-ref>
-                <img src="{{ asset('build/sidebar_icons/unselected/profil.png') }}" alt="Home" class="icon-fixed-size h-4 w-4"/>
-                <span
-                        class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
-                        data-te-sidenav-slim="false"
-                >Mon profil</span
-                >
-            </a>
-        </li>
-
-        <li class="relative">
-            <a
-                    href="{{ path('app_user_notification') }}"
-                    class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                    data-te-sidenav-link-ref>
-                <img src="{{ asset('build/sidebar_icons/unselected/notification.png') }}" alt="Home" class="icon-fixed-size h-4 w-4"/>
-                <span
-                        class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
-                        data-te-sidenav-slim="false"
-                >Notifications</span
-                >
-            </a>
-        </li>
-
-        <li class="relative">
-            <a
-                    href="{{ path('app_user_setting') }}"
-                    class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                    data-te-sidenav-link-ref>
-                <img src="{{ asset('build/sidebar_icons/unselected/outils.png') }}" alt="Home" class="icon-fixed-size h-4 w-4"/>
-                <span
-                        class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
-                        data-te-sidenav-slim="false"
-                >Outils</span
-                >
-            </a>
-        </li>
-
-        <li class="relative">
-            <a
-                    href="{{ path('app_user_api') }}"
-                    class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-600 outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit hover:outline-none focus:bg-slate-50 focus:text-inherit focus:outline-none active:bg-slate-50 active:text-inherit active:outline-none data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                    data-te-sidenav-link-ref>
-                <img src="{{ asset('build/sidebar_icons/unselected/parametres.png') }}" alt="Home" class="icon-fixed-size h-4 w-4"/>
-                <span
-                        class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
-                        data-te-sidenav-slim="false"
-                >Paramètres API</span
-                >
-            </a>
-        </li>
-
-    </ul>
-
-    <div class="mt-auto w-full">
-        <ul class="list-none p-0 m-0">
-            <li class="relative">
-                <a
-                        style="background-color: #667A8A;"
-                        href="{{ path('app_logout') }}"
-                        class="flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-white outline-none transition duration-300 ease-linear hover:bg-slate-50 hover:text-inherit focus:bg-slate-50 focus:text-inherit active:bg-slate-50 active:text-inherit data-[te-sidenav-state-active]:text-inherit data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none"
-                        data-te-sidenav-link-ref>
-                    <img src="{{ asset('build/sidebar_icons/logout.png') }}" alt="Déconnexion" class="icon-fixed-size h-4 w-4"/>
-                    <span
-                            class="group-[&[data-te-sidenav-slim-collapsed='true']]:data-[te-sidenav-slim='false']:hidden"
-                            data-te-sidenav-slim="false"
-                    >Déconnexion</span
-                    >
+<aside class="flex flex-col h-screen w-64 bg-white shadow-md" aria-label="Sidebar Navigation">
+    <div class="p-5">
+        <div class="flex items-center space-x-2">
+            <img src="{{ asset('images/logo.png') }}" width="30px" height="30px"/>
+            <span class="text-xl font-bold text-gray-800">LegiLink</span>
+        </div>
+    </div>
+    <nav class="flex-1 p-3">
+        <ul class="space-y-1">
+            <li>
+                <a href="{{ path('app_user_dashboard') }}" class="flex items-center px-4 py-2 text-sm font-medium rounded-md {{ app.request.get('_route') == 'app_user_dashboard' ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}" {{ app.request.get('_route') == 'app_user_dashboard' ? 'aria-current="page"' : '' }}>
+                    <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_user_media') }}" class="flex items-center px-4 py-2 text-sm font-medium rounded-md {{ app.request.get('_route') == 'app_user_media' ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}" {{ app.request.get('_route') == 'app_user_media' ? 'aria-current="page"' : '' }}>
+                    <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                    Media
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_profil') }}" class="flex items-center px-4 py-2 text-sm font-medium rounded-md {{ app.request.get('_route') == 'app_profil' ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}" {{ app.request.get('_route') == 'app_profil' ? 'aria-current="page"' : '' }}>
+                    <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    Mon profil
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_user_notification') }}" class="flex items-center px-4 py-2 text-sm font-medium rounded-md {{ app.request.get('_route') == 'app_user_notification' ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}" {{ app.request.get('_route') == 'app_user_notification' ? 'aria-current="page"' : '' }}>
+                    <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    Notifications
+                    <span class="ml-auto bg-red-100 text-red-600 py-0.5 px-2 rounded-full text-xs">1</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_user_setting') }}" class="flex items-center px-4 py-2 text-sm font-medium rounded-md {{ app.request.get('_route') == 'app_user_setting' ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}" {{ app.request.get('_route') == 'app_user_setting' ? 'aria-current="page"' : '' }}>
+                    <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Paramètres
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_user_api') }}" class="flex items-center px-4 py-2 text-sm font-medium rounded-md {{ app.request.get('_route') == 'app_user_api' ? 'bg-blue-100 text-blue-600' : 'text-gray-600 hover:bg-gray-100' }}" {{ app.request.get('_route') == 'app_user_api' ? 'aria-current="page"' : '' }}>
+                    <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
+                    Outils
                 </a>
             </li>
         </ul>
+    </nav>
+    <div class="p-4">
+        <a href="{{ path('app_logout') }}" class="flex items-center px-4 py-2 text-sm font-medium text-gray-600 rounded-md hover:bg-gray-100">
+            <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            Déconnexion
+        </a>
     </div>
-
-</nav>
-<!-- Sidenav -->
-
-<div id="slim-content" class="flex !pl-[77px]">
-    <!-- Toggler -->
-    <button
-            class="mt-10 inline-block rounded bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
-            aria-haspopup="true"
-            id="slim-toggler">
-       LegiLink
-    </button>
-</div>
-
+</aside>
 <div id="main-content" style="margin-left: 292px;">
     {% block body %}
 

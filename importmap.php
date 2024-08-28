@@ -16,14 +16,14 @@ return [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
-    '@hotwired/stimulus' => [
-        'version' => '3.2.2',
-    ],
     '@symfony/stimulus-bundle' => [
         'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
     ],
+    '@hotwired/stimulus' => [
+        'version' => '3.2.2',
+    ],
     '@hotwired/turbo' => [
-        'version' => '7.3.0',
+        'version' => '8.0.5',
     ],
     'bootstrap' => [
         'version' => '5.3.3',
@@ -37,5 +37,8 @@ return [
     ],
     'jquery' => [
         'version' => '3.7.1',
+    ],
+    'alpinejs' => [
+        'version' => '3.14.1',
     ],
 ];

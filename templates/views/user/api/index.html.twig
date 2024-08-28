@@ -20,12 +20,15 @@
             <button type="submit" class="btn btn-primary">Sauvegarder</button>
             {{ form_end(form) }}
         </div>
-
+        <br>
         <h2>Vos configurations API</h2>
         {% for api in apis %}
             <div>
                 <p>API Key: {{ api.apiKey }}</p>
-                <p>API Secret: {{ api.apiSecret }}</p>
+
+                <label for="api-secrete">Clé secrète</label>
+                <input type="password" id="api-secrete" value="{{ api.apiSecret }}" readonly>
+
                 <a href="{{ path('app_user_api_delete', {'id': api.id}) }}" class="btn btn-danger">Supprimer</a>
                 {% if api.isDefault == false %}
                     <a href="{{ path('app_user_api_update', {'id': api.id}) }}" class="btn btn-primary">Utiliser par défaut</a>

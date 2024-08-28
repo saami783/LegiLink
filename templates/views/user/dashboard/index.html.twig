@@ -5,31 +5,48 @@
 {% block body %}
     {% include '/partials/flashes.html.twig' %}
 
-    <h2>Statistiques du tableau de bord</h2>
+    <div class="space-y-6">
+        <h2 class="text-2xl font-bold text-gray-800">Statistiques du tableau de bord</h2>
 
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white shadow rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-700 mb-4">Dernières 24 heures</h3>
+                <div class="space-y-2">
+                    <p class="text-sm text-gray-600">Nombre total d'exécutions : <span class="font-medium text-gray-800">{{ statistics.last_24_hours.executions }}</span></p>
+                    <p class="text-sm text-gray-600">Nombre total de requêtes : <span class="font-medium text-gray-800">{{ statistics.last_24_hours.requests }}</span></p>
+                    <p class="text-sm text-gray-600">Nombre de requêtes restantes pour la journée : <span class="font-medium text-gray-800">{{ statistics.last_24_hours.remaining_requests }}</span></p>
+                </div>
+            </div>
 
-    <div>
-        <h3>Dernières 24 heures</h3>
-        <p>Nombre total d'exécutions : {{ statistics.last_24_hours.executions }}</p>
-        <p>Nombre total de requêtes : {{ statistics.last_24_hours.requests }}</p>
-        <p>Nombre de requêtes restantes pour la journée : {{ statistics.last_24_hours.remaining_requests }}</p>
+            <div class="bg-white shadow rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-700 mb-4">Derniers 7 jours</h3>
+                <div class="space-y-2">
+                    <p class="text-sm text-gray-600">Nombre total d'exécutions : <span class="font-medium text-gray-800">{{ statistics.last_7_days.executions }}</span></p>
+                    <p class="text-sm text-gray-600">Nombre total de requêtes : <span class="font-medium text-gray-800">{{ statistics.last_7_days.requests }}</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white shadow rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-700 mb-4">Derniers 30 jours</h3>
+                <div class="space-y-2">
+                    <p class="text-sm text-gray-600">Nombre total d'exécutions : <span class="font-medium text-gray-800">{{ statistics.last_30_days.executions }}</span></p>
+                    <p class="text-sm text-gray-600">Nombre total de requêtes : <span class="font-medium text-gray-800">{{ statistics.last_30_days.requests }}</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 bg-white shadow rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-700 mb-4">Upload de fichier</h3>
+            {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+            <div>
+                {{ form_label(form.file, 'Fichier', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                {{ form_widget(form.file, {'attr': {'class': 'mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100'}}) }}
+                {{ form_errors(form.file) }}
+            </div>
+            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Upload
+            </button>
+            {{ form_end(form) }}
+        </div>
     </div>
-
-    <div>
-        <h3>Derniers 7 jours</h3>
-        <p>Nombre total d'exécutions : {{ statistics.last_7_days.executions }}</p>
-        <p>Nombre total de requêtes : {{ statistics.last_7_days.requests }}</p>
-    </div>
-
-    <div>
-        <h3>Derniers 30 jours</h3>
-        <p>Nombre total d'exécutions : {{ statistics.last_30_days.executions }}</p>
-        <p>Nombre total de requêtes : {{ statistics.last_30_days.requests }}</p>
-    </div>
-
-    {{ form_start(form) }}
-    {{ form_row(form.file) }}
-    <button type="submit">Upload</button>
-    {{ form_end(form) }}
-
 {% endblock %}

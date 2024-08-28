@@ -23,7 +23,7 @@ class ApiFormType extends AbstractType
                 'required' => true
             ])
             ->add('apiSecret', TextType::class, [
-                'label' => 'Id Search Engine',
+                'label' => 'Clé secrète',
                 'required' => true
             ])
         ;
