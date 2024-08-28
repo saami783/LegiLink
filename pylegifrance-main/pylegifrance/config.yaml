@@ -1,0 +1,25 @@
+logging:
+  level: INFO
+
+api:
+  key: 8a3f3fe5-585f-4084-acdc-142e4c21321d
+  secret: efc08da2-79f4-4237-9f2c-bcebdb58ef78
+
+article_keys:
+  - pathTitle
+  - content
+  - num
+  - fullSectionsTitre
+  - texte
+  - etat
+  - VersionArticle
+
+root_keys:
+  - cid
+  - title
+
+section_keys:
+  - title
+  - cid
+
+# Ajoutez ici d'autres configurations au besoin
