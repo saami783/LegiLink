@@ -80,11 +80,10 @@ class FileStrategyManagerService
     }
 
     /**
-     * Récupère la stratégie appropriée en fonction de l'extension du fichier.
+     * Récupère l'utilisateur actuellement authentifié.
      *
-     * @param string $extension L'extension du fichier
-     * @return FileStrategyInterface La stratégie correspondante
-     * @throws \InvalidArgumentException Si aucune stratégie n'est trouvée pour l'extension donnée
+     * @return User L'utilisateur authentifié
+     * @throws \LogicException Si aucun token d'authentification n'est trouvé ou si l'utilisateur n'est pas une instance de User
      */
     private function getUser(): User
     {
