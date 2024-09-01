@@ -8,7 +8,6 @@ use App\Entity\Setting;
 use App\Entity\User;
 use App\Form\FileType;
 use App\Service\StatisticsService;
-use App\Service\UpdateFileService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,10 +18,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractController
 {
 
-    public function __construct(private UpdateFileService $fileService,
-                                private EntityManagerInterface $entityManager,
-                                private StatisticsService $statisticsService) { }
+    public function __construct(private EntityManagerInterface $entityManager, private StatisticsService $statisticsService)
+    {
 
+    }
 
     /**
      * @throws Exception
@@ -45,7 +44,7 @@ class DashboardController extends AbstractController
         } else {
             if ($form->isSubmitted() && $form->isValid()) {
                 if ($this->formTreatment($user, $entityManager, $document, $setting)) {
-                    return $this->redirectToRoute('app_user_media');
+                    return $this->redirectToRoute('app_user_media_update');
                 } else {
                     return $this->redirectToRoute('app_user_dashboard');
                 }
@@ -67,7 +66,9 @@ class DashboardController extends AbstractController
             ]);
         }
 
+
     /**
+     * @note La fonction retourne vraie ou faux si l'utilisateur satisfait toutes les conditions pour upload un fichier.
      * @throws Exception
      */
     private function formTreatment(User $user, EntityManagerInterface $entityManager, Document $document, Setting $setting) : bool
@@ -112,16 +113,7 @@ class DashboardController extends AbstractController
                 $this->addFlash('error', 'Vous avez atteint la limite de requêtes quotidienne.');
                 return false;
             }
-            $this->addFlash('success', 'Votre fichier est prêt à être télécharger ! ');
-
-            try {
-                $this->fileService->updateFile($api, $user, $setting);
-                return true;
-            } catch (Exception $e) {
-                return false;
-            }
-
+            return true;
         }
-
 
 }
