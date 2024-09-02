@@ -3,9 +3,6 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
-parameters:
-        upload_directory: '%kernel.project_dir%/public/uploads/files'
-
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -26,19 +23,13 @@ services:
 
     # Configuration du service FileStrategyManagerService
     App\Service\FileStrategyManagerService:
-
         arguments: # Injection des dépendances via le constructeur
             $documentRepository: '@App\Repository\DocumentRepository' # Injecte le repository de documents
             $tokenStorage: '@security.token_storage' # Injecte le service de stockage du token de sécurité
-
         calls: # Appels de méthodes après l'instanciation du service
-
             - [ addStrategy, [ 'md', '@App\Strategy\UpdateMdFileStrategy' ] ] # Ajoute la stratégie pour les fichiers Markdown (.md)
-
             - [ addStrategy, [ 'doc', '@App\Strategy\UpdateDocFileStrategy' ] ] # Ajoute la stratégie pour les fichiers Word (.doc)
-
             - [ addStrategy, [ 'docx', '@App\Strategy\UpdateDocxFileStrategy' ] ] # Ajoute la stratégie pour les fichiers Word modernes (.docx)
-
     # Documentation détaillée :
     #
     # 1. Le service est défini avec son nom complet (FQCN) : App\Service\FileStrategyManagerService
@@ -58,3 +49,7 @@ services:
     # différentes stratégies de mise à jour en fonction du type de fichier,
     # offrant ainsi une flexibilité pour ajouter ou modifier des stratégies sans
     # changer le code du service lui-même.
+
+    App\Strategy\UpdateMdFileStrategy:
+        arguments:
+            $storage: '@vich_uploader.storage'
