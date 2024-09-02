@@ -2,40 +2,27 @@
 
 namespace App\Enum;
 
-enum CodeEnum
+enum CodeEnum: string
 {
     /**
      * Liste des abbréviations des codes. C'est ici que tu les rajoutes si t'en as d'autres.
      * key => value
      */
-//    private array $codes = [
-//        'CC' => 'code civil',
-//        'CPC' => 'code de procédure civile',
-//        'CCom' => 'code de commerce',
-//        'CPP' => 'code de procédure pénale',
-//        'CT' => 'code du travail',
-//        'CP' => 'code pénal',
-//        'CSI' => 'code de la sécurité intérieure',
-//    ];
 
-    public const CC = "code civil";
-    public const CPC = "code de procédure civile";
-    public const CCom = "code de commerce";
-    public const CPP = "code de procédure pénale";
-    public const CT = "code du travail";
-    public const CP = "code pénal";
-    public const CSI = "code de la sécurité intérieure";
+    case CC = "code civil";
+    case CPC = "code de procédure civile";
+    case CCom = "code de commerce";
+    case CPP = "code de procédure pénale";
+    case CT = "code du travail";
+    case CP = "code pénal";
+    case CSI = "code de la sécurité intérieure";
 
-    public function getCodes(): array {
-        return [
-            "CC" => self::CC,
-            "CPC" => self::CPC,
-            "CCom" => self::CCom,
-            "CPP" => self::CPP,
-            "CT" => self::CT,
-            "CSI" => self::CSI,
-            "CP" => self::CP,
-        ];
+    public static function getCodes(): array
+    {
+        return array_combine(
+            array_column(self::cases(), 'name'),
+            array_column(self::cases(), 'value')
+        );
     }
 
 }
