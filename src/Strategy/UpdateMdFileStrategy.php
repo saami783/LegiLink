@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use App\Enum\CodeEnum;
+use Vich\UploaderBundle\Storage\StorageInterface;
 
 class UpdateMdFileStrategy extends AbstractFileStrategy
 {
@@ -27,10 +28,9 @@ class UpdateMdFileStrategy extends AbstractFileStrategy
     /** Injecte le client HTTP pour pouvoir effectuer des requêtes. */
     public function __construct(private readonly HttpClientInterface    $client,
                                 private readonly EntityManagerInterface $entityManager,
-                                private ParameterBagInterface  $params,
+                                private readonly StorageInterface $storage,
     )
-    {
-    }
+    { }
 
 
     /**
@@ -41,9 +41,10 @@ class UpdateMdFileStrategy extends AbstractFileStrategy
      *
      * /!\ Ne touche au pattern que si t'es sûr de ta regex !
      *
-     * @return bool Retourne true si le fichier a été mis à jour avec succès.
+     * @return void Retourne true si le fichier a été mis à jour avec succès.
+     * @throws \Exception
      */
-    private function updateFile(User $user): bool
+    private function updateFile(User $user): void
     {
         $apiExecution = new ApiExecution();
         $apiExecution->setExecutedAt(new \DateTimeImmutable());
@@ -55,16 +56,16 @@ class UpdateMdFileStrategy extends AbstractFileStrategy
             'isLastest' => true,
         ]);
 
-        $projectDir = $this->getParameter('upload_directory');
+        $api = $this->entityManager->getRepository(Api::class)->findOneBy(['user' => $user, 'isDefault' => true]);
+        $setting = $this->entityManager->getRepository(Setting::class)->findOneBy(['user' => $user]);
 
-        $filePath = $projectDir . '/' . $currentLatestDocument->getFileName();
+        $filePath = $this->storage->resolvePath($currentLatestDocument, 'file');
+
+        if (!$filePath || !file_exists($filePath)) throw new \Exception('File not found ' . $filePath);
 
         $content = file_get_contents($filePath);
 
-        if ($content === false) {
-            error_log("Erreur lors de la lecture du fichier.");
-            return false;
-        }
+        if ($content === false) throw new \Exception('Error reading the file ' . $filePath);
 
         $lines = explode("\n", $content);
         $updatedLines = [];
@@ -72,7 +73,7 @@ class UpdateMdFileStrategy extends AbstractFileStrategy
         foreach ($lines as $line) {
             $lineUpdated = $line;
 
-            foreach (CodeEnum::class->getCodes() as $abbr => $full) {
+            foreach (CodeEnum::getCodes() as $abbr => $full) {
                 $pattern = "/\bArt(?:\s([LRD]))?\s?(\d+(?:-\d+)?(?:\.\d+)?)\s$abbr\b/";
                 preg_match_all($pattern, $line, $matches, PREG_SET_ORDER);
 
@@ -112,10 +113,9 @@ class UpdateMdFileStrategy extends AbstractFileStrategy
         $result = file_put_contents($filePath, $updatedContent);
         if ($result === false) {
             error_log("Erreur lors de l'écriture dans le fichier.");
-            return false;
+            return;
         }
 
-        return true;
     }
 
 
@@ -126,7 +126,7 @@ class UpdateMdFileStrategy extends AbstractFileStrategy
      * @param string $query La requête de recherche.
      * @return array Tableau des résultats de recherche; tableau vide si erreur.
      */
-    private function searchGoogle(string $query, Api $api, Setting $setting): array
+    private function searchGoogle(string $query, Api $api): array
     {
         $url = 'https://www.googleapis.com/customsearch/v1';
 
