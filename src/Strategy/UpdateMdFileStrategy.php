@@ -9,7 +9,6 @@ use App\Entity\Setting;
 use App\Entity\User;
 use App\Strategy\Abstract\AbstractFileStrategy;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use App\Enum\CodeEnum;
 use Vich\UploaderBundle\Storage\StorageInterface;
@@ -19,6 +18,9 @@ class UpdateMdFileStrategy extends AbstractFileStrategy
 
     private int $count = 0;
 
+    /**
+     * @throws \Exception
+     */
     public function execute(User $user): void
     {
        $this->updateFile($user);
