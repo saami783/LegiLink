@@ -3,10 +3,6 @@
 namespace App\Controller\User;
 
 use App\Entity\Document;
-use App\Entity\User;
-use App\Repository\ApiRepository;
-use App\Repository\DocumentRepository;
-use App\Repository\SettingRepository;
 use App\Security\Voter\DocumentVoter;
 use App\Service\FileDownloadHandlerService;
 use App\Service\FileStrategyManagerService;
@@ -42,7 +38,6 @@ class MediaController extends AbstractController
     #[Route('/dashboard/media/download/{id}', name: 'app_user_download')]
     public function download(FileDownloadHandlerService $downloadHandler, Document $document): Response
     {
-
         $this->denyAccessUnlessGranted(DocumentVoter::DOWNLOAD, $document);
 
         try {
@@ -54,18 +49,12 @@ class MediaController extends AbstractController
     }
 
     #[Route('/dashboard/media/update', name: 'app_user_media_update')]
-    public function update(ApiRepository $apiRepository,
-                           DocumentRepository $documentRepository,
-                           SettingRepository $settingRepository) : Response
+    public function update() : Response
     {
-
-        /** @var User $user */
-        $user = $this->getUser();
-
         $this->strategyManagerService->executeStrategy();
 
-        // $this->addFlash('success', 'Votre fichier est prêt à être télécharger ! ');
-        return new Response('Coucou', 200);
+         $this->addFlash('success', 'Votre fichier est prêt à être télécharger ! ');
+        return $this->redirectToRoute('app_user_media');
     }
 
 }
