@@ -29,7 +29,9 @@ services:
         calls: # Appels de méthodes après l'instanciation du service
             - [ addStrategy, [ 'md', '@App\Strategy\UpdateMdFileStrategy' ] ] # Ajoute la stratégie pour les fichiers Markdown (.md)
             - [ addStrategy, [ 'doc', '@App\Strategy\UpdateDocFileStrategy' ] ] # Ajoute la stratégie pour les fichiers Word (.doc)
-            - [ addStrategy, [ 'docx', '@App\Strategy\UpdateDocxFileStrategy' ] ] # Ajoute la stratégie pour les fichiers Word modernes (.docx)
+            - [ addStrategy, [ 'docx', '@App\Strategy\UpdatePptxAndOdtFileStrategy' ] ] # Ajoute la stratégie pour les fichiers Word modernes (.docx)
+            - [ addStrategy, [ 'docx', '@App\Strategy\UpdatePptxAndOdtFileStrategy' ] ]
+            - [ addStrategy, [ 'docx', '@App\Strategy\UpdateXlsFileStrategy' ] ]
     # Documentation détaillée :
     #
     # 1. Le service est défini avec son nom complet (FQCN) : App\Service\FileStrategyManagerService

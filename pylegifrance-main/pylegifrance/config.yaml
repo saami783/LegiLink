@@ -2,8 +2,8 @@ logging:
   level: INFO
 
 api:
-  key: 8a3f3fe5-585f-4084-acdc-142e4c21321d
-  secret: efc08da2-79f4-4237-9f2c-bcebdb58ef78
+  key: your_api_key
+  secret: your_api_secret
 
 article_keys:
   - pathTitle
