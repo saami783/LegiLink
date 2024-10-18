@@ -1,5 +1,12 @@
-LegiLink - Combinaison des mots "Législation" et "Link" (lien en anglais), ce nom est direct et facile à retenir. Il évoque clairement l'objectif de relier les utilisateurs aux textes de loi pertinents.
-ddd`
+# Brouillon extrême 
+
+Maquettes figma : https://www.figma.com/design/qPIUk5pVDCkmtRvYhADKXS/LegiLink?node-id=0-88&t=AFlMPjDZdDBnW7iX-1
+
+Vidéo v2 https://youtu.be/cnCeWhOUMQE
+
+Vidéo v1 https://youtu.be/aUD3mx0OSY0
+
+## Tailwind css
 
 Deploiement en prod : https://symfony.com/doc/current/frontend/asset_mapper.html
 
@@ -45,8 +52,9 @@ Quelques sites de composants tailwinds : <br>
 @tailwind components;
 @tailwind utilities;
 
+## Documentation 
 
-Pour standardiser les entrées de ton fichier .md et faciliter le traitement par le script PHP, un format est imposé :
+Pour standardiser les entrées du fichier .md et faciliter le traitement par le script PHP, un format est imposé :
 
 Art [Type][Numéro] [Code]
 
@@ -82,4 +90,4 @@ Elle simplifie lees Expressions Régulières : Ce format uniforme rendra mes exp
 - **CP** : Code Pénal
 - **CSI** : Code de la Sécurité Intérieure
 
-mail: retours-legifrance-modernise@dila.gouv.fr
+mail api : retours-legifrance-modernise@dila.gouv.fr
